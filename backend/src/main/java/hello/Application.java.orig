@@ -77,20 +77,13 @@ public class Application {
         b2.setLat(46.0);
         b2.setLon(23.0);
 
+
         Station s1 = new Station();
         s1.setCity("Cluj");
         s1.setLat(46.776476);
         s1.setLon(23.606685);
         s1.setAvailableBikes(5);
         stationRepository.save(s1);
-
-        Station s2 = new Station();
-        s2.setCity("Cluj");
-        s2.setLat(46.762813);
-        s2.setLon(23.577983);
-        s2.setAvailableBikes(0);
-
-        stationRepository.save(s2);
 
         for (int i = 0; i < 5; i++) {
             Bike bike = new Bike();
@@ -101,6 +94,14 @@ public class Application {
             bikeRepository.save(bike);
         }
 
+<<<<<<< HEAD
+
+        //  Move the bikes from 5 to 5 seconds around
+        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
+
+	}
+=======
         Person person = new Person();
         person.setFirstName("James");
         person.setLastName("Kirk");
@@ -112,7 +113,10 @@ public class Application {
         bikeRepository.save(b1);
         bikeRepository.save(b2);
 
+
+
     }
+>>>>>>> added relationship between bike and person
 
     static class MoveBikesAroundRunnable implements Runnable {
 
@@ -149,6 +153,7 @@ public class Application {
 
             bikeRepository.save(bikesCollection);
         }
+
 
     }
 
