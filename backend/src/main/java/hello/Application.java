@@ -137,6 +137,11 @@ public class Application {
 
 
             for (final Bike b : bikesCollection) {
+
+                if (b.getId() < 5) {
+                    continue;
+                }
+
                 //  Don't allow the bikes to get 'below' (0, 0)
                 if (b.getLat() < 0) {
                     b.setLat(90);
