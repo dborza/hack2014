@@ -1,5 +1,6 @@
 package hello;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -37,6 +38,17 @@ public class Application {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder.setType(EmbeddedDatabaseType.H2).build();
     }
+
+//    @Bean
+//    public DataSource mySqlDataSource() {
+//        BasicDataSource basicDataSource = new BasicDataSource();
+//        basicDataSource.setDriverClassName("");
+//        basicDataSource.setUrl("");
+//        basicDataSource.setUsername("");
+//        basicDataSource.setPassword("");
+//        basicDataSource.setMaxActive(10);
+//        return basicDataSource;
+//    }
 
     public static void main(String[] args) {
         //  Run the application. We an also get the app context out of the method.
