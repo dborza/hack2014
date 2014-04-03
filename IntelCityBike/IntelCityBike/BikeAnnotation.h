@@ -12,6 +12,7 @@
 
 @interface BikeAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign) int bikeID;
 
-- (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord;
+- (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord bikeID:(int)bikeId;
 @end

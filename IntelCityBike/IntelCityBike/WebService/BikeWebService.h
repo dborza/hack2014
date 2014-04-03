@@ -7,8 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Bike.h"
+
+
+@protocol BikeShowDelegate <NSObject>
+
+-(void) showBike:(Bike *) bike;
+
+@end
 
 @interface BikeWebService : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+
+@property (nonatomic, weak) id<BikeShowDelegate> delegate;
+
 + (id) sharedBikeWebService;
 - (void) getAllBikes;
+- (void) startPooling;
+- (void) getAllStations;
 @end

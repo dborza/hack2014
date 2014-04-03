@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "BikeWebService.h"
 
-@interface ViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate>
+@interface ViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate, BikeShowDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

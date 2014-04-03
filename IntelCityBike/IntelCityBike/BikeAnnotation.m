@@ -10,11 +10,12 @@
 
 @implementation BikeAnnotation
 
-- (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord
+- (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord bikeID:(int)bikeId;
 {
     self = [super init];
     if (self) {
         _coordinate = coord;
+        _bikeID = bikeId;
     }
     return self;
 }

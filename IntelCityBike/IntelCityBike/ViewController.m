@@ -11,6 +11,7 @@
 #import "BikeWebService.h"
 
 @interface ViewController ()
+@property (nonatomic, strong) NSMutableArray *annotationArray;
 
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @end
@@ -25,8 +26,10 @@
     [self zoomMap];
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
-    
-    [[BikeWebService sharedBikeWebService] getAllBikes];
+    _annotationArray = [[NSMutableArray alloc]init];
+    [[BikeWebService sharedBikeWebService] setDelegate:self];
+    [[BikeWebService sharedBikeWebService] getAllStations];
+    [[BikeWebService sharedBikeWebService] startPooling];
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -45,7 +48,25 @@
     [_locationManager startUpdatingLocation];
     [_locationManager startMonitoringSignificantLocationChanges];
 }
-
+#pragma mark - bike show delegate
+-(void) showBike:(Bike *) bike
+{
+    for (BikeAnnotation *ann in _annotationArray)
+    {
+        if (ann.bikeID == bike.bikeID)
+        {
+            [_mapView removeAnnotation:ann];
+            [_annotationArray removeObject:ann];
+            break;
+        }
+    }
+    
+    BikeAnnotation *annotation = [[BikeAnnotation alloc] initWithLocation:bike.coord bikeID:bike.bikeID];
+    [_annotationArray addObject:annotation];
+    [_mapView addAnnotation:annotation];
+    
+    //[self showBikeAtCoord:bike.coord];
+}
 #pragma mark - CLLocationManager delegate
 -  (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
@@ -61,24 +82,30 @@
    
     [_mapView setRegion:region];
     
-    [self showBikeAtCoord:location.coordinate];
+  //  [self showBikeAtCoord:location.coordinate];
 }
 
 - (void) showBikeAtCoord:(CLLocationCoordinate2D) coord
 {
-    BikeAnnotation *annotation = [[BikeAnnotation alloc] initWithLocation:coord];
-    [_mapView addAnnotation:annotation];
-    
-    
+
+//    BikeAnnotation *annotation = [[BikeAnnotation alloc] initWithLocation:coord bikeID:];
+//    [_annotationArray addObject:annotation];
+//    [_mapView addAnnotation:annotation];
+  
+
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"BikeAnnotation"];
-    annotationView.image = [UIImage imageNamed:@"bike1.png"];
+    if ([annotation isKindOfClass:[BikeAnnotation class]])
+    {
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"BikeAnnotation"];
+        annotationView.image = [UIImage imageNamed:@"bike1.png"];
+        return  annotationView;
+    }
    // annotationView.centerOffset = CGPointMake(10, -20);
     
-    return  annotationView;
+    return nil;
 }
 
 
