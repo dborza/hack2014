@@ -36,6 +36,8 @@ public class Bike {
         OutOfOrder
     }
 
+    private long bikeId;
+
     public long getId() {
         return id;
     }
@@ -90,6 +92,14 @@ public class Bike {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public long getBikeId() {
+        return id;
+    }
+
+    public void setBikeId(long bikeId) {
+
     }
 
     /**
