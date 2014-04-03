@@ -53,6 +53,24 @@ public class Application {
     public static void main(String[] args) {
         //  Run the application. We an also get the app context out of the method.
 		ApplicationContext ctx = SpringApplication.run(Application.class, args);
+
+        //  Bootstrap the app with some fake data
+        BikeRepository bikeRepository = ctx.getBean(BikeRepository.class);
+
+        Bike b1 = new Bike();
+        b1.setCity("Cluj");
+        b1.setStatus(Bike.Status.Free);
+        b1.setLat(45.0);
+        b1.setLon(25.0);
+
+        Bike b2 = new Bike();
+        b2.setCity("Pitesti");
+        b2.setStatus(Bike.Status.Free);
+        b2.setLat(46.0);
+        b2.setLon(23.0);
+
+        bikeRepository.save(b1);
+        bikeRepository.save(b2);
 	}
 
 }
