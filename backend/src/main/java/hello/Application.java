@@ -56,6 +56,7 @@ public class Application {
 
         //  Bootstrap the app with some fake data
         BikeRepository bikeRepository = ctx.getBean(BikeRepository.class);
+        StationRepository stationRepository = ctx.getBean(StationRepository.class);
 
         Bike b1 = new Bike();
         b1.setCity("Cluj");
@@ -71,6 +72,22 @@ public class Application {
 
         bikeRepository.save(b1);
         bikeRepository.save(b2);
+
+        Station s1 = new Station();
+        s1.setCity("Cluj");
+        s1.setLat(46.776476);
+        s1.setLon(23.606685);
+        s1.setAvailableBikes(5);
+        stationRepository.save(s1);
+
+        for (int i = 0; i < 5; i++) {
+            Bike bike = new Bike();
+            bike.setCity("Cluj");
+            bike.setLat(46.776476);
+            bike.setLon(23.606685);
+            bike.setStatus(Bike.Status.Free);
+            bikeRepository.save(bike);
+        }
 	}
 
 }
