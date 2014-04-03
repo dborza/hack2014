@@ -1,12 +1,10 @@
 package hello;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
 
@@ -18,10 +16,8 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-    @NotNull
 	private String firstName;
 
-    @NotNull
 	private String lastName;
 
     @CreatedDate

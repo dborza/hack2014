@@ -1,6 +1,5 @@
 package hello;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,16 +16,12 @@ public class Bike {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-    @NotNull
     private String city;
 
-    @NotNull
     private Status status;
 
-    @NotNull
     private String lat;
 
-    @NotNull
     private String lon;
 
     @CreatedDate
