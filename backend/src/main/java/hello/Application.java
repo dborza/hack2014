@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -96,7 +97,7 @@ public class Application {
 
         //  Move the bikes from 5 to 5 seconds around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 2, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
 
 	}
 
@@ -104,8 +105,7 @@ public class Application {
 
         final BikeRepository bikeRepository;
 
-        final double deltaLat = 0.1;
-        final double deltaLon = 0.1;
+        final double deltaMax = 0.01;
 
         MoveBikesAroundRunnable(BikeRepository bikeRepository) {
             this.bikeRepository = bikeRepository;
@@ -116,7 +116,9 @@ public class Application {
 
             System.out.println("Moving bikes...");
 
+            final Random random = new Random();
             final Iterable<Bike> bikesCollection = bikeRepository.findAll();
+
 
             for (final Bike b : bikesCollection) {
                 //  Don't allow the bikes to get 'below' (0, 0)
@@ -126,8 +128,10 @@ public class Application {
                 if (b.getLon() < 0) {
                     b.setLon(90);
                 }
-                b.setLat(b.getLat() - deltaLat);
-                b.setLon(b.getLon() - deltaLon);
+                final int i = random.nextInt(11) - 5;
+                final int j = random.nextInt(11) - 5;
+                b.setLat(b.getLat() - i * deltaMax);
+                b.setLon(b.getLon() - j * deltaMax);
             }
 
             bikeRepository.save(bikesCollection);
