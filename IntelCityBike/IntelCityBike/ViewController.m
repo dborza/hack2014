@@ -10,9 +10,11 @@
 #import "BikeAnnotation.h"
 #import "BikeWebService.h"
 #import "StationAnnotation.h"
+#import "StationAnnotationView.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) NSMutableArray *annotationArray;
+@property (nonatomic, strong) NSMutableArray *stationAnnotationArray;
 
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @end
@@ -28,10 +30,12 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     _annotationArray = [[NSMutableArray alloc]init];
+    _stationAnnotationArray = [[NSMutableArray alloc]init];
     [[BikeWebService sharedBikeWebService] setDelegate:self];
-    [[BikeWebService sharedBikeWebService] getAllStations];
-    [[BikeWebService sharedBikeWebService] startPooling];
+    //[[BikeWebService sharedBikeWebService] getAllStations];
     
+    [[BikeWebService sharedBikeWebService] startPooling];
+    [[BikeWebService sharedBikeWebService] startStationsPooling];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -53,8 +57,20 @@
 #pragma mark - bike show delegate
 - (void) showStation:(Station *)station{
  
-    StationAnnotation *annotation = [[StationAnnotation alloc] initWithStation:station];
     
+    for (StationAnnotation *ann in _stationAnnotationArray)
+    {
+        if (ann.stationID == station.stationId)
+        {
+            [_mapView removeAnnotation:ann];
+            [_stationAnnotationArray removeObject:ann];
+            break;
+        }
+    }
+
+    
+    StationAnnotation *annotation = [[StationAnnotation alloc] initWithStation:station];
+    [_stationAnnotationArray addObject:annotation];
     [_mapView addAnnotation:annotation];
 
     
@@ -115,8 +131,9 @@
     }
     else if ([annotation isKindOfClass:[StationAnnotation class]])
     {
-        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
-        annotationView.image = [UIImage imageNamed:@"station.png"];
+        StationAnnotationView * annotationView = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
+//        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
+//        annotationView.image = [UIImage imageNamed:@"station.png"];
         return  annotationView;
     }
 

@@ -14,7 +14,9 @@
 
 NSString *const DanIP = @"http://54.72.167.121:8080";
 NSString *const MihaiIP = @"http://10.41.0.136:8080";
-#define PoolTime  1
+
+#define PoolTime  2
+
 
 @interface BikeWebService()
 
@@ -22,7 +24,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 @property (nonatomic, strong) NSURLConnection * urlConnection;
 @property (nonatomic, strong) NSMutableData * data;
 @property (nonatomic, strong) NSTimer *timer;
-
+@property (nonatomic, strong) NSTimer *stationTimer;
+@property (nonatomic, strong) JSONDecoder *decoder;
 @end
 
 @implementation BikeWebService
@@ -36,6 +39,7 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     
     if(self)
     {
+         _decoder = [[JSONDecoder alloc] init];
     }
     return self;
 }
@@ -66,8 +70,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 #pragma  mark - other methods
 - (NSDictionary *) decodeBikes:(NSData *) bikes
 {
-    JSONDecoder *decoder = [[JSONDecoder alloc] init];
-    NSDictionary * dict = [decoder objectWithData:bikes];
+    
+    NSDictionary * dict = [_decoder objectWithData:bikes];
     
     NSDictionary * bikesDict = [dict objectForKey:@"_embedded"];
     NSArray *bikesArray = [bikesDict objectForKey:@"bikes"];
@@ -84,8 +88,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 }
 - (NSDictionary *) decodeStations:(NSData *) bikes
 {
-    JSONDecoder *decoder = [[JSONDecoder alloc] init];
-    NSDictionary * dict = [decoder objectWithData:bikes];
+    
+    NSDictionary * dict = [_decoder objectWithData:bikes];
     
     NSDictionary * stationsDict = [dict objectForKey:@"_embedded"];
     NSArray *stationsArray = [stationsDict objectForKey:@"stations"];
@@ -126,6 +130,35 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     _urlConnection = nil;
 }
 
+- (void) stationsPool{
+    
+    
+    NSError *error = nil;
+    NSURLResponse *response = nil;
+    
+    NSURL *url = [[NSURL alloc] initWithString: [NSString stringWithFormat:@"%@/stations",DanIP] ];
+    NSURLRequest * request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy  timeoutInterval:5 ];
+    NSData * responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (!error)
+    {
+        [self performSelectorOnMainThread:@selector(decodeStations:) withObject:responseData waitUntilDone:YES];
+    }
+    
+    //   [self performSelector:@selector(longBikesPool) withObject:nil];
+    //  NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];
+    if (_stationTimer == nil)
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _stationTimer = [NSTimer scheduledTimerWithTimeInterval:PoolTime target:self selector:@selector(stationsTimerFired:) userInfo:nil repeats:NO];
+        });
+    }
+    //    [self performSelector:@selector(longBikesPool) withObject:nil afterDelay:PoolTime];
+    
+}
+
+
 - (void) longBikesPool{
     
     
@@ -143,17 +176,35 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     
  //   [self performSelector:@selector(longBikesPool) withObject:nil];
   //  NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];
- if (_timer == nil)
- {
-  _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];
- }
+    if (_timer == nil)
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO];
+        });
+    }
 //    [self performSelector:@selector(longBikesPool) withObject:nil afterDelay:PoolTime];
-    [self performSelectorInBackground:@selector(longBikesPool) withObject:nil];
+   
+}
+
+-(void) stationsTimerFired:(NSTimer *)timer{
+    
+    _stationTimer = nil;
+    [self performSelectorInBackground:@selector(stationsPool) withObject:nil];
 }
 
 -(void) timerFired:(NSTimer *)timer{
 
-    timer = nil;
+    _timer = nil;
+    [self performSelectorInBackground:@selector(longBikesPool) withObject:nil];
+}
+
+- (void) startStationsPooling
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self performSelectorInBackground:@selector(stationsPool) withObject:nil];
+    });
     
 }
 

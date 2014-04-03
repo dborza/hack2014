@@ -26,4 +26,5 @@
 - (void) getAllBikes;
 - (void) startPooling;
 - (void) getAllStations;
+- (void) startStationsPooling;
 @end
