@@ -98,6 +98,8 @@ public class Application {
             bike.setLat(46.776476);
             bike.setLon(23.606685);
             bike.setStatus(Bike.Status.Free);
+            bike.setGender(Bike.Gender.Female);
+            bike.setType(Bike.Type.CityBike);
             bikeRepository.save(bike);
         }
 

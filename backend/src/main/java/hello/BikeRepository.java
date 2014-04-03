@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NamedQuery;
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "bikes", path = "bikes")
@@ -29,5 +30,10 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     @Transactional
     @Query(value = "update hello.Bike b set b.lon = ?2, b.lat = ?3 where b.id = ?1")
     void updateGeoCoordinates(long bikeId, double lon, double lat);
+
+    List<Bike> findByStatusAndShoppingBasketAndChildrenSeatAndGenderAndType(
+            @Param("status") Bike.Status status, @Param("shoppingBasket") boolean shoppingBasket,
+            @Param("childrenSeat") boolean childrenSeat, @Param("gender") Bike.Gender gender,
+            @Param("type") Bike.Type type);
 
 }
