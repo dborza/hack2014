@@ -117,6 +117,8 @@ public class Application {
         //  Move the bikes around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
+
+        //new GeoCsvReader().run("/geo1.csv");
     }
 
     static class MoveBikesAroundRunnable implements Runnable {
