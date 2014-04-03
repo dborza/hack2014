@@ -17,6 +17,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Application launcher and config class at the same time.
@@ -88,6 +92,48 @@ public class Application {
             bike.setStatus(Bike.Status.Free);
             bikeRepository.save(bike);
         }
+
+
+        //  Move the bikes from 5 to 5 seconds around
+        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 2, TimeUnit.SECONDS);
+
 	}
+
+    static class MoveBikesAroundRunnable implements Runnable {
+
+        final BikeRepository bikeRepository;
+
+        final double deltaLat = 0.1;
+        final double deltaLon = 0.1;
+
+        MoveBikesAroundRunnable(BikeRepository bikeRepository) {
+            this.bikeRepository = bikeRepository;
+        }
+
+        @Override
+        public void run() {
+
+            System.out.println("Moving bikes...");
+
+            final Iterable<Bike> bikesCollection = bikeRepository.findAll();
+
+            for (final Bike b : bikesCollection) {
+                //  Don't allow the bikes to get 'below' (0, 0)
+                if (b.getLat() < 0) {
+                    b.setLat(90);
+                }
+                if (b.getLon() < 0) {
+                    b.setLon(90);
+                }
+                b.setLat(b.getLat() - deltaLat);
+                b.setLon(b.getLon() - deltaLon);
+            }
+
+            bikeRepository.save(bikesCollection);
+        }
+
+
+    }
 
 }
