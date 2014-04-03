@@ -9,6 +9,7 @@
 #import "BikeWebService.h"
 #import "JSONKit.h"
 #import "Bike.h"
+#import "Station.h"
 
 
 NSString *const DanIP = @"http://54.72.167.121:8080";
@@ -86,15 +87,15 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     JSONDecoder *decoder = [[JSONDecoder alloc] init];
     NSDictionary * dict = [decoder objectWithData:bikes];
     
-    NSDictionary * bikesDict = [dict objectForKey:@"_embedded"];
-    NSArray *bikesArray = [bikesDict objectForKey:@"bikes"];
+    NSDictionary * stationsDict = [dict objectForKey:@"_embedded"];
+    NSArray *stationsArray = [stationsDict objectForKey:@"stations"];
     
-    for (NSDictionary *oneBikeDict in bikesArray ) {
+    for (NSDictionary *oneStationDict in stationsArray ) {
         
-        Bike * oneBike = [[Bike alloc] initWithDict:oneBikeDict];
-        if (_delegate && [_delegate respondsToSelector:@selector(showBike:)])
+        Station * oneStation = [[Station alloc] initWithDict:oneStationDict];
+        if (_delegate && [_delegate respondsToSelector:@selector(showStation:)])
         {
-            [_delegate showBike:oneBike];
+            [_delegate showStation:oneStation];
         }
     }
     return dict;

@@ -27,6 +27,8 @@
 		D6D71EBD18ED5DAC00A7DB99 /* Bike.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EBC18ED5DAC00A7DB99 /* Bike.m */; };
 		D6D71EC018ED9D6400A7DB99 /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D71EBE18ED9D6400A7DB99 /* station.png */; };
 		D6D71EC118ED9D6400A7DB99 /* station@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D71EBF18ED9D6400A7DB99 /* station@2x.png */; };
+		D6D71EC418EDA16B00A7DB99 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EC318EDA16B00A7DB99 /* Station.m */; };
+		D6D71EC718EDA5B600A7DB99 /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */; };
 		D6EA5A5018ED44010083CDA1 /* BikeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */; };
 		D6EA5A5318ED48340083CDA1 /* bike1.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EA5A5218ED48340083CDA1 /* bike1.png */; };
 		D6EA5A5518ED49B70083CDA1 /* bike1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EA5A5418ED49B70083CDA1 /* bike1@2x.png */; };
@@ -71,6 +73,10 @@
 		D6D71EBC18ED5DAC00A7DB99 /* Bike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bike.m; sourceTree = "<group>"; };
 		D6D71EBE18ED9D6400A7DB99 /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
 		D6D71EBF18ED9D6400A7DB99 /* station@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station@2x.png"; sourceTree = "<group>"; };
+		D6D71EC218EDA16B00A7DB99 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		D6D71EC318EDA16B00A7DB99 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		D6D71EC518EDA5B600A7DB99 /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
+		D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
 		D6EA5A4E18ED44010083CDA1 /* BikeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikeAnnotation.h; sourceTree = "<group>"; };
 		D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikeAnnotation.m; sourceTree = "<group>"; };
 		D6EA5A5218ED48340083CDA1 /* bike1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bike1.png; sourceTree = "<group>"; };
@@ -154,6 +160,10 @@
 				D6EA5A5718ED4B870083CDA1 /* BikeWebService.m */,
 				D6D71EBB18ED5DAC00A7DB99 /* Bike.h */,
 				D6D71EBC18ED5DAC00A7DB99 /* Bike.m */,
+				D6D71EC218EDA16B00A7DB99 /* Station.h */,
+				D6D71EC318EDA16B00A7DB99 /* Station.m */,
+				D6D71EC518EDA5B600A7DB99 /* StationAnnotation.h */,
+				D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */,
 			);
 			path = IntelCityBike;
 			sourceTree = "<group>";
@@ -316,8 +326,10 @@
 				D6EA5A5818ED4B870083CDA1 /* BikeWebService.m in Sources */,
 				D6D71EBA18ED5C5500A7DB99 /* JSONKit.m in Sources */,
 				D6EA5A5018ED44010083CDA1 /* BikeAnnotation.m in Sources */,
+				D6D71EC718EDA5B600A7DB99 /* StationAnnotation.m in Sources */,
 				D6D71EBD18ED5DAC00A7DB99 /* Bike.m in Sources */,
 				D632D2A018ED2EFB00A8092B /* AppDelegate.m in Sources */,
+				D6D71EC418EDA16B00A7DB99 /* Station.m in Sources */,
 				D632D29C18ED2EFB00A8092B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

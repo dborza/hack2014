@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "BikeAnnotation.h"
 #import "BikeWebService.h"
+#import "StationAnnotation.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) NSMutableArray *annotationArray;
@@ -48,8 +49,17 @@
     [_locationManager startUpdatingLocation];
     [_locationManager startMonitoringSignificantLocationChanges];
 }
+
 #pragma mark - bike show delegate
--(void) showBike:(Bike *) bike
+- (void) showStation:(Station *)station{
+ 
+    StationAnnotation *annotation = [[StationAnnotation alloc] initWithStation:station];
+    
+    [_mapView addAnnotation:annotation];
+
+    
+}
+- (void) showBike:(Bike *) bike
 {
     for (BikeAnnotation *ann in _annotationArray)
     {
@@ -103,6 +113,14 @@
         annotationView.image = [UIImage imageNamed:@"bike1.png"];
         return  annotationView;
     }
+    else if ([annotation isKindOfClass:[StationAnnotation class]])
+    {
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
+        annotationView.image = [UIImage imageNamed:@"station.png"];
+        return  annotationView;
+    }
+
+    
    // annotationView.centerOffset = CGPointMake(10, -20);
     
     return nil;

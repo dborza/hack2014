@@ -1,5 +1,5 @@
 //
-//  BikeAnnotation.h
+//  StationAnnotation.h
 //  IntelCityBike
 //
 //  Created by Iustina Gligor on 4/3/14.
@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-@class Bike;
+@class Station;
 
-@interface BikeAnnotation : NSObject <MKAnnotation>
+@interface StationAnnotation : NSObject<MKAnnotation>
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-@property (nonatomic, assign) int bikeID;
+@property (nonatomic, assign) int stationID;
+@property (nonatomic, assign) int availableBikes;
 
-- (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord bikeID:(int)bikeId;
-
-- (id)initBike:(Bike*) bike;
+- (id) initWithStation: (Station *) station;
 
 @end

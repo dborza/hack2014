@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "Bike.h"
+#import "Station.h"
 
 
 @protocol BikeShowDelegate <NSObject>
 
 -(void) showBike:(Bike *) bike;
+-(void) showStation:(Station *) station;
 
 @end
 

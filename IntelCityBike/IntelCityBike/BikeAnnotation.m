@@ -7,6 +7,7 @@
 //
 
 #import "BikeAnnotation.h"
+#import "Bike.h"
 
 @implementation BikeAnnotation
 
@@ -18,5 +19,15 @@
         _bikeID = bikeId;
     }
     return self;
+}
+- (id)initBike:(Bike*) bike
+{
+    self = [super init];
+    if (self) {
+        _coordinate = bike.coord;
+        _bikeID = bike.bikeID;
+    }
+    return self;
+    
 }
 @end
