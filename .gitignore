@@ -15,3 +15,7 @@ hs_err_pid*
 **/.idea
 **/*.iml
 **/*.ipr
+
+# build files
+**/target
+**/out
