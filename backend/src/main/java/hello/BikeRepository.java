@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +17,13 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     List<Bike> findByStatus(@Param("status") Bike.Status status);
 
     @Modifying
-    @Query(value = "update hello.Bike b set b.status = ?1 where b.id = ?2")
-    int setFixedFirstnameFor(String status, Long id);
+    @Transactional
+    @Query(value = "update hello.Bike b set b.city = ?1 where b.id = ?2")
+    int setCityFor(String city, Long id);
+
+    @Transactional
+    @Query(value = "select b from hello.Bike b order by (b.lon - ?1) * (b.lon - ?1) + (b.lat - ?2) * (b.lat - ?2) asc")
+    List<Bike> getNearestBike(double lon, double lat);
+
 
 }
