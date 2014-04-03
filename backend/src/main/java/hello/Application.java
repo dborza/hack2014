@@ -95,9 +95,6 @@ public class Application {
         }
 
 
-        //  Move the bikes from 5 to 5 seconds around
-        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
 
 	}
 

@@ -20,6 +20,10 @@ public class Person {
 
 	private String lastName;
 
+    @OneToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="PBIKE_ID")
+    private Bike lastBike;
+
     @CreatedDate
     private Date createDate;
 
@@ -64,6 +68,14 @@ public class Person {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Bike getLastBike() {
+        return lastBike;
+    }
+
+    public void setLastBike(Bike lastBike) {
+        this.lastBike = lastBike;
     }
 
     /**

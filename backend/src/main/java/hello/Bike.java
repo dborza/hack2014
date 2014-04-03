@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.Random;
 
 @Entity
-@EntityListeners(value = { AuditingEntityListener.class } )
+@EntityListeners(value = {AuditingEntityListener.class})
 public class Bike {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     private String city;
 
@@ -24,6 +24,17 @@ public class Bike {
 
     private double lon;
 
+    private boolean shoppingBasket;
+
+    private boolean childrenSeat;
+
+    private Gender gender;
+
+    private Type type;
+
+    @OneToOne(mappedBy = "lastBike",cascade=CascadeType.PERSIST)
+    private Person lastUser;
+
     @CreatedDate
     private Date createDate;
 
@@ -32,8 +43,19 @@ public class Bike {
 
     static enum Status {
         Free,
+        Reserved,
         Taken,
         OutOfOrder
+    }
+
+    static enum Gender {
+        Male,
+        Female,
+        Unisex
+    }
+
+    static enum Type {
+        CityBike, MountainBike
     }
 
     private long bikeId;
@@ -102,8 +124,48 @@ public class Bike {
 
     }
 
+    public boolean isShoppingBasket() {
+        return shoppingBasket;
+    }
+
+    public void setShoppingBasket(boolean shoppingBasket) {
+        this.shoppingBasket = shoppingBasket;
+    }
+
+    public boolean isChildrenSeat() {
+        return childrenSeat;
+    }
+
+    public void setChildrenSeat(boolean childrenSeat) {
+        this.childrenSeat = childrenSeat;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Person getLastUser() {
+        return lastUser;
+    }
+
+    public void setLastUser(Person lastUser) {
+        this.lastUser = lastUser;
+    }
+
     /**
-     *  Just generate a random {@link hello.Bike}.
+     * Just generate a random {@link hello.Bike}.
      */
     public static Bike rand() {
         final Bike b = new Bike();
