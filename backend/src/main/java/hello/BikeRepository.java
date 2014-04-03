@@ -25,5 +25,9 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     @Query(value = "select b from hello.Bike b order by (b.lon - ?1) * (b.lon - ?1) + (b.lat - ?2) * (b.lat - ?2) asc")
     List<Bike> getNearestBike(double lon, double lat);
 
+    @Modifying
+    @Transactional
+    @Query(value = "update hello.Bike b set b.lon = ?2, b.lat = ?3 where b.id = ?1")
+    void updateGeoCoordinates(long bikeId, double lon, double lat);
 
 }

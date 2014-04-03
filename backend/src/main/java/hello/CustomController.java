@@ -50,8 +50,6 @@ public class CustomController {
     @ResponseStatus(HttpStatus.OK)
     public Bike getNearestBike(@PathVariable("lon") double lon, @PathVariable("lat") double lat) {
 
-        //  Save a randomly generated entity and also return it from the controller method.
-        //  The controller will automatically return the json form for this entity.
         List<Bike> bikes = bikeRepository.getNearestBike(lon, lat);
         if (bikes.size() > 0) {
             return bikes.get(0);
@@ -60,5 +58,13 @@ public class CustomController {
         }
     }
 
+    @RequestMapping(
+            value="/updateCoordinates/{bikeId}",
+            method= RequestMethod.PUT,
+            produces={"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public void updateGeoCoordinates(@PathVariable("bikeId") long bikeId, @RequestParam("lon") double lon, @RequestParam("lat") double lat) {
 
+        bikeRepository.updateGeoCoordinates(bikeId, lon, lat);
+    }
 }
