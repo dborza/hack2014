@@ -20,9 +20,9 @@ public class Bike {
 
     private Status status;
 
-    private String lat;
+    private double lat;
 
-    private String lon;
+    private double lon;
 
     @CreatedDate
     private Date createDate;
@@ -76,19 +76,19 @@ public class Bike {
         this.updateDate = updateDate;
     }
 
-    public String getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public String getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public void setLon(String lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
 
@@ -96,12 +96,11 @@ public class Bike {
      *  Just generate a random {@link hello.Bike}.
      */
     public static Bike rand() {
-        final int i = Math.abs(new Random().nextInt());
         final Bike b = new Bike();
-        b.city = "Cluj-Napoca-" + i;
+        b.city = "Cluj";
         b.status = Status.Free;
-        b.lat = "lat";
-        b.lon = "lon";
+        b.lat = 46.778337;
+        b.lon = 23.606102;
         return b;
     }
 
