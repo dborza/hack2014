@@ -95,8 +95,8 @@ public class Application {
         for (int i = 0; i < 5; i++) {
             Bike bike = new Bike();
             bike.setCity("Cluj");
-            bike.setLat(46.776476 + 0.00001 * i);
-            bike.setLon(23.606685);
+            bike.setLat(46.776476);
+            bike.setLon(23.606685 + 0.00001 * i);
             bike.setStatus(Bike.Status.Free);
             bike.setGender(Bike.Gender.Female);
             bike.setType(Bike.Type.CityBike);
