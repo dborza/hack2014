@@ -32,7 +32,9 @@ public class Bike {
 
     private Type type;
 
-    @OneToOne(mappedBy = "lastBike",cascade=CascadeType.PERSIST)
+    private Color color;
+
+    @OneToOne(mappedBy = "lastBike", cascade = CascadeType.PERSIST)
     private Person lastUser;
 
     @CreatedDate
@@ -40,6 +42,10 @@ public class Bike {
 
     @LastModifiedDate
     private Date updateDate;
+
+    static enum Color {
+        Red, Cyan, Blue, Purple, Yellow, Lime, Magenta, White, Silver, Gray, Black, Orange, Brown, Green
+    }
 
     static enum Status {
         Free,
@@ -55,7 +61,7 @@ public class Bike {
     }
 
     static enum Type {
-        CityBike, MountainBike
+        CityBike, MountainBike, CruiserBike
     }
 
     private long bikeId;
@@ -162,6 +168,14 @@ public class Bike {
 
     public void setLastUser(Person lastUser) {
         this.lastUser = lastUser;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     /**

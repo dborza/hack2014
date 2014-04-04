@@ -68,12 +68,14 @@ public class Application {
         b1.setStatus(Bike.Status.OutOfOrder);
         b1.setLat(45.0);
         b1.setLon(25.0);
+        b1.setColor(Bike.Color.Green);
 
         Bike b2 = new Bike();
         b2.setCity("Pitesti");
         b2.setStatus(Bike.Status.OutOfOrder);
         b2.setLat(46.0);
         b2.setLon(23.0);
+        b2.setColor(Bike.Color.Green);
 
         Station s1 = new Station();
         s1.setCity("Cluj");
@@ -98,6 +100,7 @@ public class Application {
             bike.setStatus(Bike.Status.Free);
             bike.setGender(Bike.Gender.Female);
             bike.setType(Bike.Type.CityBike);
+            bike.setColor(Bike.Color.Red);
             bikeRepository.save(bike);
         }
 
@@ -124,6 +127,7 @@ public class Application {
             bike.setStatus(Bike.Status.Taken);
             bike.setGender(Bike.Gender.Male);
             bike.setType(Bike.Type.CityBike);
+            bike.setColor(Bike.Color.Blue);
             bikeRepository.save(bike);
         }
 

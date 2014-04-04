@@ -31,9 +31,8 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     @Query(value = "update hello.Bike b set b.lon = ?2, b.lat = ?3 where b.id = ?1")
     void updateGeoCoordinates(long bikeId, double lon, double lat);
 
-    List<Bike> findByStatusAndShoppingBasketAndChildrenSeatAndGenderAndType(
+    List<Bike> findByStatusAndShoppingBasketAndChildrenSeatAndGenderAndTypeAndColor(
             @Param("status") Bike.Status status, @Param("shoppingBasket") boolean shoppingBasket,
             @Param("childrenSeat") boolean childrenSeat, @Param("gender") Bike.Gender gender,
-            @Param("type") Bike.Type type);
-
+            @Param("type") Bike.Type type, @Param("color") Bike.Color color);
 }
