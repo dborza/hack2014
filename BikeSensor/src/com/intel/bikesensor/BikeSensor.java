@@ -51,7 +51,7 @@ public class BikeSensor extends Activity {
 
         LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         LocationListener locListener = new MyLocationListener();
-        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0.1f, locListener);
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5.0f, locListener);
     }
 
     public class MyLocationListener implements LocationListener
