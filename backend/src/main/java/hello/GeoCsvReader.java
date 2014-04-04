@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Read an input file located at the root of the classpath (either on the file system or in the final jar) and return
@@ -22,11 +24,11 @@ public class GeoCsvReader {
      * @param fileName
      * @return
      */
-    public Collection<GeoCoords> run(String fileName) {
+    public List<GeoCoords> run(String fileName) {
 
         System.out.println("File name: " + new File(fileName).getAbsolutePath() + ", exists: " + new File(fileName).exists());
 
-        Collection<GeoCoords> list = new LinkedList<GeoCoords>();
+        List<GeoCoords> list = new LinkedList<GeoCoords>();
 
         BufferedReader br = null;
         InputStream is = null;
@@ -52,10 +54,10 @@ public class GeoCsvReader {
                 String [] elements = line.split(cvsSplitBy);
 
                 GeoCoords gc = new GeoCoords();
-                gc.lat = Double.valueOf(elements[0].trim());
-                gc.lon = Double.valueOf(elements[1].trim());
+                gc.lat = Double.valueOf(elements[1].trim());
+                gc.lon = Double.valueOf(elements[0].trim());
 
-                System.out.println("Read geo " + gc);
+                //System.out.println("Read geo " + gc);
 
                 list.add(gc);
             }

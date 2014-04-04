@@ -16,9 +16,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -67,13 +65,13 @@ public class Application {
 
         Bike b1 = new Bike();
         b1.setCity("Cluj");
-        b1.setStatus(Bike.Status.Free);
+        b1.setStatus(Bike.Status.OutOfOrder);
         b1.setLat(45.0);
         b1.setLon(25.0);
 
         Bike b2 = new Bike();
         b2.setCity("Pitesti");
-        b2.setStatus(Bike.Status.Free);
+        b2.setStatus(Bike.Status.OutOfOrder);
         b2.setLat(46.0);
         b2.setLon(23.0);
 
@@ -95,7 +93,7 @@ public class Application {
         for (int i = 0; i < 5; i++) {
             Bike bike = new Bike();
             bike.setCity("Cluj");
-            bike.setLat(46.776476);
+            bike.setLat(46.776476 + 0.00001 * i);
             bike.setLon(23.606685);
             bike.setStatus(Bike.Status.Free);
             bike.setGender(Bike.Gender.Female);
@@ -114,11 +112,25 @@ public class Application {
         bikeRepository.save(b1);
         bikeRepository.save(b2);
 
+
+        //bikes moving on route
+        //ID-s start with 8
+
+        for (int i = 8; i <= 9; i++) {
+            Bike bike = new Bike();
+            bike.setCity("Cluj");
+            bike.setLat(0);
+            bike.setLon(0);
+            bike.setStatus(Bike.Status.Taken);
+            bike.setGender(Bike.Gender.Male);
+            bike.setType(Bike.Type.CityBike);
+            bikeRepository.save(bike);
+        }
+
         //  Move the bikes around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
 
-        //new GeoCsvReader().run("/geo1.csv");
     }
 
     static class MoveBikesAroundRunnable implements Runnable {
@@ -127,8 +139,19 @@ public class Application {
 
         final double deltaMax = 0.01;
 
+        Map<Long, List<GeoCoords>> geoCoordinates = new HashMap<Long, List<GeoCoords>>();
+        Map<Long, Integer> currentPositions = new HashMap<Long, Integer>();
+
+
         MoveBikesAroundRunnable(BikeRepository bikeRepository) {
             this.bikeRepository = bikeRepository;
+            System.out.println("Reading routes...");
+
+            geoCoordinates.put(8L, new GeoCsvReader().run("/geo1.csv"));
+            geoCoordinates.put(9L, new GeoCsvReader().run("/geo2.csv"));
+            currentPositions.put(8L, 0);
+            currentPositions.put(9L, 0);
+
         }
 
         @Override
@@ -139,7 +162,24 @@ public class Application {
             final Random random = new Random();
             final Iterable<Bike> bikesCollection = bikeRepository.findAll();
 
+            for (final Bike b : bikesCollection) {
+                if (geoCoordinates.containsKey(b.getId())) {
+                    List<GeoCoords> geoCoords = geoCoordinates.get(b.getId());
+                    int currentPosition = currentPositions.get(b.getId());
+                    GeoCoords coords = geoCoords.get(currentPosition);
+                    currentPosition++;
+                    if (currentPosition >= geoCoords.size()) {
+                        currentPosition = 0;
+                    }
+                    currentPositions.put(b.getId(), currentPosition);
+                    b.setLat(coords.lat);
+                    b.setLon(coords.lon);
+                    b.setStatus(Bike.Status.Taken);
+                    System.out.println("Moving bike " + b.getId() + " to " + coords.lon + ", " + coords.lat + " (position " + currentPosition + ")");
+                }
+            }
 
+/*
             for (final Bike b : bikesCollection) {
 
                 if (b.getId() < 5) {
@@ -157,8 +197,9 @@ public class Application {
                 final int j = random.nextInt(11) - 5;
                 b.setLat(b.getLat() - i * deltaMax);
                 b.setLon(b.getLon() - j * deltaMax);
+                b.setStatus(Bike.Status.Taken);
             }
-
+*/
             bikeRepository.save(bikesCollection);
         }
 
