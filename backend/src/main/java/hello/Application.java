@@ -134,7 +134,6 @@ public class Application {
         //  Move the bikes around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleWithFixedDelay(new MoveBikesAroundRunnable(bikeRepository), 0, 1, TimeUnit.SECONDS);
-
     }
 
     static class MoveBikesAroundRunnable implements Runnable {
