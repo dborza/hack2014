@@ -60,8 +60,8 @@ public class BikeSensor extends Activity {
     private void setupButtons() {
         final Button markFreeAndIncCount = (Button) findViewById(R.id.btn_MarkFreeIncCount);
         final Button markTakenAndDecCount = (Button) findViewById(R.id.btn_markTakenDecCount);
-        markFreeAndIncCount.setOnClickListener(new ChangeBikeStatusAndStationCount(true, "Free"));
-        markTakenAndDecCount.setOnClickListener(new ChangeBikeStatusAndStationCount(false, "Taken"));
+        markFreeAndIncCount.setOnClickListener(new TakeOrLeaveBikeAtStationOnClickListener(1));
+        markTakenAndDecCount.setOnClickListener(new TakeOrLeaveBikeAtStationOnClickListener(-1));
     }
 
     private void setupLocationManager() {
@@ -70,24 +70,76 @@ public class BikeSensor extends Activity {
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5.0f, locListener);
     }
 
-    class ChangeBikeStatusAndStationCount implements View.OnClickListener {
+    class TakeOrLeaveBikeAtStationOnClickListener implements View.OnClickListener {
 
-        private final boolean increase;
+        private final int delta;
 
-        private final String status;
-
-        ChangeBikeStatusAndStationCount(boolean increase, String status) {
-            this.increase = increase;
-            this.status = status;
+        TakeOrLeaveBikeAtStationOnClickListener(int delta) {
+            this.delta = delta;
         }
 
         @Override
         public void onClick(View view) {
+
             final EditText bikeIdEditText = (EditText) findViewById(R.id.text_bikeId);
             final EditText stationIdEditText = (EditText) findViewById(R.id.text_stationId);
             final Long bikeId = Long.valueOf(bikeIdEditText.getText().toString());
             final Long stationId = Long.valueOf(stationIdEditText.getText().toString());
-            Log.i("tag", "increase: " + increase + ", status: " + status + ", bikeId: " + bikeId + ", stationId: " + stationId);
+
+            Log.i("tag", "delta: " + delta + ", bikeId: " + bikeId + ", stationId: " + stationId);
+
+            String baseUrl = getString(R.string.take_or_leave_bike_at_station_url);
+
+            new TakeOrLeaveBikeAtStationAsyncTask(bikeId, stationId, delta, baseUrl).execute();
+        }
+    }
+
+    /**
+     * Make sure the server knows that the Bike is being parked / unparked from a station
+     * by modifying the bike number that are being parked at the given station.
+     */
+    class TakeOrLeaveBikeAtStationAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private final long bikeId;
+        private final long stationId;
+        private final int delta;
+        private final String baseUrl;
+
+        TakeOrLeaveBikeAtStationAsyncTask(long bikeId, long stationId, int delta, String baseUrl) {
+            this.bikeId = bikeId;
+            this.stationId = stationId;
+            this.delta = delta;
+            this.baseUrl = baseUrl;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            final HttpPut put = new HttpPut(baseUrl + "?bikeId=" + bikeId + "&stationId=" + stationId + "&delta=" + delta);
+
+            HttpResponse response = null;
+
+            try {
+                response = defaultHttpClient.execute(put);
+                final long responseCode = response.getStatusLine().getStatusCode();
+                final String responseBody = EntityUtils.toString(response.getEntity());
+                Log.i("tag", "Received response " + responseCode + ", body: " + responseBody);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (response != null) {
+                    try {
+                        response.getEntity().consumeContent();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+            return null;
         }
     }
 

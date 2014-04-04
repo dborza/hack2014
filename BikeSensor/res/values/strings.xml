@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">BikeSensor</string>
     <string name="server_bike_url">http://54.72.167.121:8080/api/updateCoordinates/</string>
+    <string name="take_or_leave_bike_at_station_url">http://10.41.0.163:8080/api/takeOrLeaveBikeAtStation</string>
 </resources>
