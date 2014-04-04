@@ -119,7 +119,7 @@ public class Application {
         //bikes moving on route
         //ID-s start with 8
 
-        for (int i = 8; i <= 9; i++) {
+        for (int i = 0; i < 12; i++) {
             Bike bike = new Bike();
             bike.setCity("Cluj");
             bike.setLat(0);
@@ -151,11 +151,10 @@ public class Application {
             this.bikeRepository = bikeRepository;
             System.out.println("Reading routes...");
 
-            geoCoordinates.put(8L, new GeoCsvReader().run("/geo1.csv"));
-            geoCoordinates.put(9L, new GeoCsvReader().run("/geo2.csv"));
-            currentPositions.put(8L, 0);
-            currentPositions.put(9L, 0);
-
+            for (int i = 1; i <= 12; i++) {
+                geoCoordinates.put(7L + i, new GeoCsvReader().run("/geo" + i + ".csv"));
+                currentPositions.put(7L + i, 0);
+            }
         }
 
         @Override
