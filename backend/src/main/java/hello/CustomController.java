@@ -67,4 +67,5 @@ public class CustomController {
 
         bikeRepository.updateGeoCoordinates(bikeId, lon, lat);
     }
+
 }
