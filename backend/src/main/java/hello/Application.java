@@ -127,7 +127,7 @@ public class Application {
             bike.setStatus(Bike.Status.Taken);
             bike.setGender(Bike.Gender.Male);
             bike.setType(Bike.Type.CityBike);
-            bike.setColor(Bike.Color.Blue);
+            bike.setColor(Bike.Color.values()[i % 6]);
             bikeRepository.save(bike);
         }
 

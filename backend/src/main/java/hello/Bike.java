@@ -43,7 +43,8 @@ public class Bike {
     private Date updateDate;
 
     static enum Color {
-        Red, Cyan, Blue, Purple, Yellow, Lime, Magenta, White, Silver, Gray, Black, Orange, Brown, Green
+        //Red, Cyan, Blue, Purple, Yellow, Lime, Magenta, White, Silver, Gray, Black, Orange, Brown, Green
+        DarkBlue, Blue, Orange, Red, Yellow, Green
     }
 
     static enum Status {
