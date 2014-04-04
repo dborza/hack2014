@@ -10,5 +10,37 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             />
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark Free And Inc Count"
+            android:id="@+id/btn_MarkFreeIncCount"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark Taken And Dec Count"
+            android:id="@+id/btn_markTakenDecCount"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText" android:text="Bike Id"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/text_bikeId"
+            android:text="1" android:editable="true"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText2" android:text="Station Id"/>
+    <EditText
+            android:layout_width="201dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/text_stationId"
+            android:text="1" android:editable="true"/>
 </LinearLayout>
 

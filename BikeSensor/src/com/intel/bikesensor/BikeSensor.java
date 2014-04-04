@@ -8,6 +8,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.http.HttpResponse;
@@ -49,9 +52,43 @@ public class BikeSensor extends Activity {
 
         setContentView(R.layout.main);
 
+        setupLocationManager();
+
+        setupButtons();
+    }
+
+    private void setupButtons() {
+        final Button markFreeAndIncCount = (Button) findViewById(R.id.btn_MarkFreeIncCount);
+        final Button markTakenAndDecCount = (Button) findViewById(R.id.btn_markTakenDecCount);
+        markFreeAndIncCount.setOnClickListener(new ChangeBikeStatusAndStationCount(true, "Free"));
+        markTakenAndDecCount.setOnClickListener(new ChangeBikeStatusAndStationCount(false, "Taken"));
+    }
+
+    private void setupLocationManager() {
         LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         LocationListener locListener = new MyLocationListener();
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5.0f, locListener);
+    }
+
+    class ChangeBikeStatusAndStationCount implements View.OnClickListener {
+
+        private final boolean increase;
+
+        private final String status;
+
+        ChangeBikeStatusAndStationCount(boolean increase, String status) {
+            this.increase = increase;
+            this.status = status;
+        }
+
+        @Override
+        public void onClick(View view) {
+            final EditText bikeIdEditText = (EditText) findViewById(R.id.text_bikeId);
+            final EditText stationIdEditText = (EditText) findViewById(R.id.text_stationId);
+            final Long bikeId = Long.valueOf(bikeIdEditText.getText().toString());
+            final Long stationId = Long.valueOf(stationIdEditText.getText().toString());
+            Log.i("tag", "increase: " + increase + ", status: " + status + ", bikeId: " + bikeId + ", stationId: " + stationId);
+        }
     }
 
     public class MyLocationListener implements LocationListener

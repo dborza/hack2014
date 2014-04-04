@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -18,6 +19,9 @@ public class CustomController {
 
     @Autowired
     private BikeRepository bikeRepository;
+
+    @Autowired
+    private StationRepository stationRepository;
 
     @RequestMapping(
             value="/addRandomPerson",
@@ -67,5 +71,28 @@ public class CustomController {
 
         bikeRepository.updateGeoCoordinates(bikeId, lon, lat);
     }
+
+//    @Transactional
+    @RequestMapping(
+            value="/takeOrLeaveBikeAtStation",
+            method= RequestMethod.PUT,
+            produces={"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public void takeOrLeaveBikeAtStation(@RequestParam("bikeId") long bikeId, @RequestParam("stationId") long stationId,
+                                         @RequestParam("delta") int delta) {
+
+        Bike.Status status = null;
+
+        if (delta > 0) {
+            status = Bike.Status.Free;
+        } else {
+            status = Bike.Status.Taken;
+        }
+
+        bikeRepository.updateStatusForBikeId(bikeId, status);
+
+        stationRepository.updateAvailableBikesForStation(stationId, delta);
+    }
+
 
 }
