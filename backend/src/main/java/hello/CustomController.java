@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -13,6 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CustomController {
+
+    @Autowired
+    private CustomService customService;
 
     @Autowired
     private PersonRepository personRepository;
@@ -80,17 +82,9 @@ public class CustomController {
     public void takeOrLeaveBikeAtStation(@RequestParam("bikeId") long bikeId, @RequestParam("stationId") long stationId,
                                          @RequestParam("delta") int delta, @RequestParam("userId") long userId) {
 
-        Bike.Status status = null;
 
-        if (delta > 0) {
-            status = Bike.Status.Free;
-        } else {
-            status = Bike.Status.Taken;
-        }
+        customService.takeOrLeaveBikeAtStation(bikeId, stationId, delta, userId);
 
-        bikeRepository.updateStatusForBikeId(bikeId, status);
-
-        stationRepository.updateAvailableBikesForStation(stationId, delta);
     }
 
     @RequestMapping(
