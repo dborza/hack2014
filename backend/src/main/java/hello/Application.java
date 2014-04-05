@@ -1,6 +1,5 @@
 package hello;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +13,6 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -98,7 +96,7 @@ public class Application {
             bike.setCity("Cluj");
             bike.setLat(lat[i]);
             bike.setLon(lon[i]);
-            bike.setStatus(Bike.Status.Free);
+            bike.setStatus(BikeStatus.Free);
 
             if (i > 0) {
                 bike.setGender(Bike.Gender.values()[i % 3]);
