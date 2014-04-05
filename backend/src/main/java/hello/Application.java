@@ -68,6 +68,8 @@ public class Application {
         b1.setStatus(Bike.Status.OutOfOrder);
         b1.setLat(45.0);
         b1.setLon(25.0);
+        b1.setType(Bike.Type.MountainBike);
+        b1.setGender(Bike.Gender.Unisex);
         b1.setColor(Bike.Color.Green);
 
         Bike b2 = new Bike();
@@ -75,6 +77,8 @@ public class Application {
         b2.setStatus(Bike.Status.OutOfOrder);
         b2.setLat(46.0);
         b2.setLon(23.0);
+        b2.setType(Bike.Type.MountainBike);
+        b2.setGender(Bike.Gender.Unisex);
         b2.setColor(Bike.Color.Green);
 
 
