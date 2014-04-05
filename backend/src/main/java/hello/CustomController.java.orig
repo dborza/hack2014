@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
+=======
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+>>>>>>> attempt to put users on bikes
 import java.util.List;
 
 /**
@@ -137,4 +140,7 @@ public class CustomController {
         return bikes;
 
     }
+
+
+
 }
