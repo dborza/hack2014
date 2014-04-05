@@ -123,7 +123,7 @@ public class Application {
             bike.setType(Bike.Type.CityBike);
             bike.setColor(Bike.Color.values()[i % 6]);
             movingBikes.add(bike);
-            bikeRepository.save(bike);
+            //bikeRepository.save(bike);
         }
 
         Person person1 = new Person();
@@ -131,7 +131,6 @@ public class Application {
         person1.setLastName("Kirk");
         person1.setEmail("kirk");
         person1.setLastBike(movingBikes.get(0));
-        //person1.setLastBike(b1);
 
         Person person2 = new Person();
         person2.setFirstName("Jean Luc");
@@ -166,6 +165,9 @@ public class Application {
         personRepository.save(person4);
         personRepository.save(person5);
 
+        for (Bike bike : movingBikes) {
+            bikeRepository.save(bike);
+        }
 
         //  Move the bikes around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);

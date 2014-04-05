@@ -34,7 +34,7 @@ public class Bike {
 
     private Color color;
 
-    @OneToOne(mappedBy = "lastBike", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "lastBike", cascade = CascadeType.ALL)
     private Person lastUser;
 
     @CreatedDate

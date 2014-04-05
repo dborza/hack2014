@@ -23,7 +23,7 @@ public class Person {
 
     private long personId;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="PBIKE_ID")
     private Bike lastBike;
 
