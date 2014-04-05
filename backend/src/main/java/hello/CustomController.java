@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -107,6 +108,34 @@ public class CustomController {
         p1.getBuddies().add(p2);
         personRepository.save(p1);
     }
+
+
+    @RequestMapping(
+            value="/getBuddiesOnBikes/{id}",
+            method= RequestMethod.GET,
+            produces={"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<Bike> getBuddiesOnBikes(@PathVariable("id") long personId) {
+
+        Collection<Bike> bikes = new ArrayList<Bike>();
+
+        List<Person> me = personRepository.findById(personId);
+
+        if (me.size() == 0) {
+            return bikes;
+        }
+
+        for (Person p : me.get(0).getBuddies()) {
+            Bike lastBike = p.getLastBike();
+            if (lastBike != null && lastBike.getStatus().equals(Bike.Status.Taken)) {
+                bikes.add(lastBike);
+            }
+        }
+
+        return bikes;
+
+    }
+
 
 
 }

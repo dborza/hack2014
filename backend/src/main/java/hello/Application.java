@@ -104,48 +104,14 @@ public class Application {
             bikeRepository.save(bike);
         }
 
-
-        Person person1 = new Person();
-        person1.setFirstName("James");
-        person1.setLastName("Kirk");
-        person1.setEmail("kirk");
-        person1.setLastBike(b1);
-
-        Person person2 = new Person();
-        person2.setFirstName("Jean Luc");
-        person2.setLastName("Picard");
-        person2.setEmail("picard");
-
-        Person person3 = new Person();
-        person3.setFirstName("Benjamin");
-        person3.setLastName("Sisko");
-        person3.setEmail("sisko");
-
-        Person person4 = new Person();
-        person4.setFirstName("Kathryn");
-        person4.setLastName("Janeway");
-        person4.setEmail("janeway");
-
-        Person person5 = new Person();
-        person5.setFirstName("Jonathan");
-        person5.setLastName("Archer");
-        person5.setEmail("archer");
-
-        person1.getBuddies().add(person2);
-
-        b1.setLastUser(person1);
-        personRepository.save(person1);
-        personRepository.save(person2);
-        personRepository.save(person3);
-        personRepository.save(person4);
-        personRepository.save(person5);
-
         bikeRepository.save(b1);
         bikeRepository.save(b2);
 
 
         //bikes moving on route
         //ID-s start with 8
+
+        List<Bike> movingBikes = new ArrayList<Bike>();
 
         for (int i = 0; i < 12; i++) {
             Bike bike = new Bike();
@@ -156,8 +122,50 @@ public class Application {
             bike.setGender(Bike.Gender.Male);
             bike.setType(Bike.Type.CityBike);
             bike.setColor(Bike.Color.values()[i % 6]);
+            movingBikes.add(bike);
             bikeRepository.save(bike);
         }
+
+        Person person1 = new Person();
+        person1.setFirstName("James");
+        person1.setLastName("Kirk");
+        person1.setEmail("kirk");
+        person1.setLastBike(movingBikes.get(0));
+        //person1.setLastBike(b1);
+
+        Person person2 = new Person();
+        person2.setFirstName("Jean Luc");
+        person2.setLastName("Picard");
+        person2.setEmail("picard");
+        person2.setLastBike(movingBikes.get(1));
+
+        Person person3 = new Person();
+        person3.setFirstName("Benjamin");
+        person3.setLastName("Sisko");
+        person3.setEmail("sisko");
+        person3.setLastBike(movingBikes.get(2));
+
+        Person person4 = new Person();
+        person4.setFirstName("Kathryn");
+        person4.setLastName("Janeway");
+        person4.setEmail("janeway");
+        person4.setLastBike(movingBikes.get(3));
+
+        Person person5 = new Person();
+        person5.setFirstName("Jonathan");
+        person5.setLastName("Archer");
+        person5.setEmail("archer");
+        person5.setLastBike(movingBikes.get(4));
+
+        person2.getBuddies().add(person1);
+
+        //b1.setLastUser(person1);
+        personRepository.save(person2);
+        personRepository.save(person1);
+        personRepository.save(person3);
+        personRepository.save(person4);
+        personRepository.save(person5);
+
 
         //  Move the bikes around
         final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
