@@ -14,7 +14,7 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
 
     List<Bike> findByCity(@Param("city") String city);
 
-    List<Bike> findByStatus(@Param("status") Bike.Status status);
+    List<Bike> findByStatus(@Param("status") BikeStatus status);
 
     @Modifying
     @Transactional
@@ -35,9 +35,24 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
             "and (b.color=:color or :color is null) " +
             "order by (b.lon - :lon) * (b.lon - :lon) + (b.lat - :lat) * (b.lat - :lat) asc")
     List<Bike> getNearestMatchingBike(@Param("lon") double lon, @Param("lat") double lat,
-                                      @Param("status") Bike.Status status, @Param("shoppingBasket") Boolean shoppingBasket,
-                                      @Param("childrenSeat") Boolean childrenSeat, @Param("gender") Bike.Gender gender,
-                                      @Param("type") Bike.Type type, @Param("color") Bike.Color color);
+          @Param("status") BikeStatus status, @Param("shoppingBasket") Boolean shoppingBasket,
+          @Param("childrenSeat") Boolean childrenSeat, @Param("gender") Bike.Gender gender,
+          @Param("type") Bike.Type type, @Param("color") Bike.Color color);
+
+    @Transactional
+    @Query(value = "select b from hello.Bike b " +
+            "where (b.status=hello.BikeStatus.Free or b.status=hello.BikeStatus.Reserved) " +
+            "and (b.shoppingBasket=:shoppingBasket or :shoppingBasket is null)" +
+            "and (b.childrenSeat=:childrenSeat or :childrenSeat is null) " +
+            "and (b.gender=:gender or :gender is null) " +
+            "and (b.type=:type or :type is null) " +
+            "and (b.color=:color or :color is null) " +
+            "order by (b.lon - :lon) * (b.lon - :lon) + (b.lat - :lat) * (b.lat - :lat) asc")
+    List<Bike> getNearestFreeOrReservedMatchingBike(@Param("lon") double lon, @Param("lat") double lat,
+                                                    @Param("shoppingBasket") Boolean shoppingBasket,
+                                                    @Param("childrenSeat") Boolean childrenSeat, @Param("gender") Bike.Gender gender,
+                                                    @Param("type") Bike.Type type, @Param("color") Bike.Color color);
+
 
     @Modifying
     @Transactional
@@ -47,10 +62,10 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     @Modifying
     @Transactional
     @Query(value = "update hello.Bike b set b.status = :status where b.id = :id")
-    void updateStatusForBikeId(@Param("id") long bikeId, @Param("status") Bike.Status status);
+    void updateStatusForBikeId(@Param("id") long bikeId, @Param("status") BikeStatus status);
 
     List<Bike> findByStatusAndShoppingBasketAndChildrenSeatAndGenderAndType(
-            @Param("status") Bike.Status status, @Param("shoppingBasket") boolean shoppingBasket,
+            @Param("status") BikeStatus status, @Param("shoppingBasket") boolean shoppingBasket,
             @Param("childrenSeat") boolean childrenSeat, @Param("gender") Bike.Gender gender,
             @Param("type") Bike.Type type, @Param("color") Bike.Color color);
 }

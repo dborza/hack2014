@@ -129,7 +129,7 @@ public class CustomController {
 
         for (Person p : me.get(0).getBuddies()) {
             Bike lastBike = p.getLastBike();
-            if (lastBike != null && lastBike.getStatus().equals(Bike.Status.Taken)) {
+            if (lastBike != null && lastBike.getStatus().equals(BikeStatus.Taken)) {
                 bikes.add(lastBike);
             }
         }

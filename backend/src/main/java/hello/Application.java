@@ -65,7 +65,7 @@ public class Application {
 
         Bike b1 = new Bike();
         b1.setCity("Cluj");
-        b1.setStatus(Bike.Status.OutOfOrder);
+        b1.setStatus(BikeStatus.OutOfOrder);
         b1.setLat(45.0);
         b1.setLon(25.0);
         b1.setType(Bike.Type.MountainBike);
@@ -74,7 +74,7 @@ public class Application {
 
         Bike b2 = new Bike();
         b2.setCity("Pitesti");
-        b2.setStatus(Bike.Status.OutOfOrder);
+        b2.setStatus(BikeStatus.OutOfOrder);
         b2.setLat(46.0);
         b2.setLon(23.0);
         b2.setType(Bike.Type.MountainBike);
@@ -130,7 +130,7 @@ public class Application {
             bike.setCity("Cluj");
             bike.setLat(0);
             bike.setLon(0);
-            bike.setStatus(Bike.Status.Taken);
+            bike.setStatus(BikeStatus.Taken);
             bike.setGender(Bike.Gender.Male);
             bike.setType(Bike.Type.CityBike);
             bike.setColor(Bike.Color.values()[i % 6]);
@@ -226,7 +226,7 @@ public class Application {
                     currentPositions.put(b.getId(), currentPosition);
                     b.setLat(coords.lat);
                     b.setLon(coords.lon);
-                    b.setStatus(Bike.Status.Taken);
+                    b.setStatus(BikeStatus.Taken);
                     System.out.println("Moving bike " + b.getId() + " to " + coords.lon + ", " + coords.lat + " (position " + currentPosition + ")");
                 }
             }

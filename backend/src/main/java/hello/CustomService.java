@@ -32,12 +32,12 @@ public class CustomService {
     @Transactional
     public void takeOrLeaveBikeAtStation(long bikeId, long stationId, int delta, long userId) {
 
-        Bike.Status status = null;
+        BikeStatus status = null;
 
         if (delta > 0) {
-            status = Bike.Status.Free;
+            status = BikeStatus.Free;
         } else {
-            status = Bike.Status.Taken;
+            status = BikeStatus.Taken;
         }
 
         bikeRepository.updateStatusForBikeId(bikeId, status);
@@ -45,7 +45,7 @@ public class CustomService {
         stationRepository.updateAvailableBikesForStation(stationId, delta);
 
         //  Take away the bike from the station => add the bike to the user
-        if (status == Bike.Status.Taken) {
+        if (status == BikeStatus.Taken) {
             bindPersonAndBike(userId, bikeId);
         }
     }

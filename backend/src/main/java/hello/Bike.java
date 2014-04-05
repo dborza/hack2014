@@ -18,7 +18,7 @@ public class Bike {
 
     private String city;
 
-    private Status status;
+    private BikeStatus status;
 
     private double lat;
 
@@ -46,13 +46,6 @@ public class Bike {
     static enum Color {
         //Red, Cyan, Blue, Purple, Yellow, Lime, Magenta, White, Silver, Gray, Black, Orange, Brown, Green
         DarkBlue, Blue, Orange, Red, Yellow, Green
-    }
-
-    static enum Status {
-        Free,
-        Reserved,
-        Taken,
-        OutOfOrder
     }
 
     static enum Gender {
@@ -83,11 +76,11 @@ public class Bike {
         this.city = city;
     }
 
-    public Status getStatus() {
+    public BikeStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(BikeStatus status) {
         this.status = status;
     }
 
@@ -185,7 +178,7 @@ public class Bike {
     public static Bike rand() {
         final Bike b = new Bike();
         b.city = "Cluj";
-        b.status = Status.Free;
+        b.status = BikeStatus.Free;
         b.lat = 46.778337;
         b.lon = 23.606102;
         return b;
@@ -196,7 +189,7 @@ public class Bike {
     public static Bike rand(double lat, double lon) {
         final Bike b = new Bike();
         b.city = "Cluj";
-        b.status = Status.Free;
+        b.status = BikeStatus.Free;
         b.lat = lat;
         b.lon = lon;
         b.childrenSeat = random.nextBoolean();
