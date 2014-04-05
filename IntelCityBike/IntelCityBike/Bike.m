@@ -36,6 +36,7 @@
             _coord = CLLocationCoordinate2DMake(lat,lon);
             _city = [dict objectForKey:@"city"];
             _status = [dict objectForKey:@"status"];
+            _color = [dict objectForKey:@"color"];
         }
     }
     return self;

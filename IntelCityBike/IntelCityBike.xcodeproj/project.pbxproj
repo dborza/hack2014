@@ -25,14 +25,10 @@
 		D632D2C818ED326B00A8092B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D632D2C718ED326B00A8092B /* MapKit.framework */; };
 		D6D71EBA18ED5C5500A7DB99 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EB918ED5C5500A7DB99 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6D71EBD18ED5DAC00A7DB99 /* Bike.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EBC18ED5DAC00A7DB99 /* Bike.m */; };
-		D6D71EC018ED9D6400A7DB99 /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D71EBE18ED9D6400A7DB99 /* station.png */; };
-		D6D71EC118ED9D6400A7DB99 /* station@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D71EBF18ED9D6400A7DB99 /* station@2x.png */; };
 		D6D71EC418EDA16B00A7DB99 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EC318EDA16B00A7DB99 /* Station.m */; };
 		D6D71EC718EDA5B600A7DB99 /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */; };
 		D6D71ECA18EDAA1F00A7DB99 /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D71EC918EDAA1F00A7DB99 /* StationAnnotationView.m */; };
 		D6EA5A5018ED44010083CDA1 /* BikeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */; };
-		D6EA5A5318ED48340083CDA1 /* bike1.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EA5A5218ED48340083CDA1 /* bike1.png */; };
-		D6EA5A5518ED49B70083CDA1 /* bike1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EA5A5418ED49B70083CDA1 /* bike1@2x.png */; };
 		D6EA5A5818ED4B870083CDA1 /* BikeWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EA5A5718ED4B870083CDA1 /* BikeWebService.m */; };
 /* End PBXBuildFile section */
 
@@ -72,8 +68,6 @@
 		D6D71EB918ED5C5500A7DB99 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		D6D71EBB18ED5DAC00A7DB99 /* Bike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bike.h; sourceTree = "<group>"; };
 		D6D71EBC18ED5DAC00A7DB99 /* Bike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bike.m; sourceTree = "<group>"; };
-		D6D71EBE18ED9D6400A7DB99 /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
-		D6D71EBF18ED9D6400A7DB99 /* station@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "station@2x.png"; sourceTree = "<group>"; };
 		D6D71EC218EDA16B00A7DB99 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
 		D6D71EC318EDA16B00A7DB99 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		D6D71EC518EDA5B600A7DB99 /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
@@ -82,8 +76,6 @@
 		D6D71EC918EDAA1F00A7DB99 /* StationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotationView.m; sourceTree = "<group>"; };
 		D6EA5A4E18ED44010083CDA1 /* BikeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikeAnnotation.h; sourceTree = "<group>"; };
 		D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikeAnnotation.m; sourceTree = "<group>"; };
-		D6EA5A5218ED48340083CDA1 /* bike1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bike1.png; sourceTree = "<group>"; };
-		D6EA5A5418ED49B70083CDA1 /* bike1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bike1@2x.png"; sourceTree = "<group>"; };
 		D6EA5A5618ED4B870083CDA1 /* BikeWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BikeWebService.h; path = WebService/BikeWebService.h; sourceTree = "<group>"; };
 		D6EA5A5718ED4B870083CDA1 /* BikeWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BikeWebService.m; path = WebService/BikeWebService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,10 +198,6 @@
 		D6EA5A5118ED48340083CDA1 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				D6D71EBE18ED9D6400A7DB99 /* station.png */,
-				D6D71EBF18ED9D6400A7DB99 /* station@2x.png */,
-				D6EA5A5418ED49B70083CDA1 /* bike1@2x.png */,
-				D6EA5A5218ED48340083CDA1 /* bike1.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -301,12 +289,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6EA5A5318ED48340083CDA1 /* bike1.png in Resources */,
 				D632D2A618ED2EFB00A8092B /* Main_iPad.storyboard in Resources */,
 				D632D2AB18ED2EFB00A8092B /* Images.xcassets in Resources */,
-				D6EA5A5518ED49B70083CDA1 /* bike1@2x.png in Resources */,
-				D6D71EC018ED9D6400A7DB99 /* station.png in Resources */,
-				D6D71EC118ED9D6400A7DB99 /* station@2x.png in Resources */,
 				D632D2A318ED2EFB00A8092B /* Main_iPhone.storyboard in Resources */,
 				D632D29A18ED2EFB00A8092B /* InfoPlist.strings in Resources */,
 			);

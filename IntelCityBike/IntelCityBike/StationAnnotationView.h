@@ -11,4 +11,5 @@
 @interface StationAnnotationView : MKAnnotationView
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier;
+- (void) animateBikeChange:(int) newAvailableBikes;
 @end

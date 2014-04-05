@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSString * status;
 @property (nonatomic, assign) CLLocationCoordinate2D coord;
 @property (nonatomic, assign)  int bikeID;
+@property (nonatomic, strong) NSString * color;
+
 
 - (id) initWithLatitude:(NSString *)latitude longitude:(NSString *) longitude city:(NSString *) city status:(NSString *) status;
 - (id) initWithDict: (NSDictionary *)dict;

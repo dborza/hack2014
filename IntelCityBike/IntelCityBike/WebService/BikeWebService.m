@@ -12,7 +12,7 @@
 #import "Station.h"
 
 
-NSString *const DanIP = @"http://54.72.167.121:8080";
+NSString *const DanIP = @"http://54.72.175.223:8080";
 NSString *const MihaiIP = @"http://10.41.0.136:8080";
 
 #define PoolTime  2
@@ -26,6 +26,7 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSTimer *stationTimer;
 @property (nonatomic, strong) JSONDecoder *decoder;
+@property (nonatomic, assign) int x;
 @end
 
 @implementation BikeWebService
@@ -99,6 +100,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         Station * oneStation = [[Station alloc] initWithDict:oneStationDict];
         if (_delegate && [_delegate respondsToSelector:@selector(showStation:)])
         {
+          //  _x+=1;
+            oneStation.availableBikes +=_x;
             [_delegate showStation:oneStation];
         }
     }

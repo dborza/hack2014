@@ -27,6 +27,7 @@
     
     [self startUpdatingLocation];
     [self zoomMap];
+    
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     _annotationArray = [[NSMutableArray alloc]init];
@@ -39,6 +40,31 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        [_mapView removeAnnotations:_annotationArray];
+        [_annotationArray removeAllObjects];
+    }
+}
 - (void) startUpdatingLocation
 {
     if (!_locationManager)
@@ -62,8 +88,20 @@
     {
         if (ann.stationID == station.stationId)
         {
-            [_mapView removeAnnotation:ann];
-            [_stationAnnotationArray removeObject:ann];
+            if (ann.availableBikes == station.availableBikes)
+            {
+                return;
+            }
+            else
+            {
+                ann.availableBikes = station.availableBikes;
+                StationAnnotationView *annView = (StationAnnotationView *)[_mapView viewForAnnotation:ann];
+                [annView animateBikeChange:ann.availableBikes];
+                return;
+            }
+            
+//            [_mapView removeAnnotation:ann];
+//            [_stationAnnotationArray removeObject:ann];
             break;
         }
     }
@@ -81,13 +119,17 @@
     {
         if (ann.bikeID == bike.bikeID)
         {
+            if (bike.coord.latitude == ann.coordinate.latitude && bike.coord.longitude == ann.coordinate.longitude)
+            {
+                return;
+            }
             [_mapView removeAnnotation:ann];
             [_annotationArray removeObject:ann];
             break;
         }
     }
     
-    BikeAnnotation *annotation = [[BikeAnnotation alloc] initWithLocation:bike.coord bikeID:bike.bikeID];
+    BikeAnnotation *annotation = [[BikeAnnotation alloc] initBike:bike];
     [_annotationArray addObject:annotation];
     [_mapView addAnnotation:annotation];
     
@@ -111,29 +153,31 @@
   //  [self showBikeAtCoord:location.coordinate];
 }
 
-- (void) showBikeAtCoord:(CLLocationCoordinate2D) coord
-{
-
-//    BikeAnnotation *annotation = [[BikeAnnotation alloc] initWithLocation:coord bikeID:];
-//    [_annotationArray addObject:annotation];
-//    [_mapView addAnnotation:annotation];
-  
-
-}
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    static NSString * bikeAnnotation = @"BikeAnnotation";
     if ([annotation isKindOfClass:[BikeAnnotation class]])
     {
-        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"BikeAnnotation"];
-        annotationView.image = [UIImage imageNamed:@"bike1.png"];
+        BikeAnnotation *ann = (BikeAnnotation *) annotation;
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:bikeAnnotation];
+        
+        NSString * bikeIcon = @"Blue.png";
+
+        if (ann.color && ![ann.color isEqualToString:@""])
+        {
+            bikeIcon = [NSString stringWithFormat:@"%@.png",ann.color];
+        }
+        annotationView.image = [UIImage imageNamed:bikeIcon];
+                [annotationView setNeedsDisplay];
         return  annotationView;
     }
     else if ([annotation isKindOfClass:[StationAnnotation class]])
     {
-        StationAnnotationView * annotationView = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
+         static NSString * stationAnnotation = @"StationAnnotation";
+        StationAnnotationView * annotationView = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:stationAnnotation];
+        [annotationView setNeedsDisplay];
 //        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"StationAnnotation"];
-//        annotationView.image = [UIImage imageNamed:@"station.png"];
+   //    annotationView.image = [UIImage imageNamed:@"station.png"];
         return  annotationView;
     }
 

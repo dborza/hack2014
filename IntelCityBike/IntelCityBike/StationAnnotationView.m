@@ -12,6 +12,7 @@
 @interface StationAnnotationView()
 
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UIImageView *animView;
 @end
 @implementation StationAnnotationView
 
@@ -40,13 +41,29 @@
         
         self.opaque = NO;
         
+        CGRect rect = (CGRect){-10,0,self.frame.size.width+20,20};
+        
         //self.image = [UIImage imageNamed:@"station.png"];
-        _label = [[UILabel alloc] initWithFrame:(CGRect){-10,0,self.frame.size.width+20,20}];
+        _label = [[UILabel alloc] initWithFrame:rect];
         _label.textAlignment = NSTextAlignmentCenter;
         _label.backgroundColor = [UIColor clearColor];
+        _label.adjustsFontSizeToFitWidth = true;
         _label.text = [NSString stringWithFormat:@"%d bikes",((StationAnnotation *)annotation).availableBikes];
+        
+//        _animView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Fade2.png"]];
+//        _animView.frame = (CGRect){0,0,60,100};
+//        _animView.center = self.center;
+
+        _animView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Fade.png"]];
+        _animView.frame = (CGRect){0,0,60,40};
+        _animView.center = _label.center;
+
+        _animView.alpha = 0;
+        
+        [self addSubview:_animView];
         [self addSubview:_label];
         
+
     }
     return self;
     
@@ -61,9 +78,38 @@
     CGRect imgRect = rect;
     imgRect.size.height -=20;
     imgRect.origin.y = 20;
-    UIImage *img = [UIImage imageNamed:@"station.png"];
+    UIImage *img = [UIImage imageNamed:@"Station.png"];
     [img drawInRect:imgRect];
 }
 
+- (void) animateBikeChange:(int) newAvailableBikes
+{
+    CGRect frame = _label.frame;
+    frame.size = CGSizeMake(frame.size.width-20, frame.size.height);
+    frame.origin = CGPointMake(frame.origin.x+10, frame.origin.y);
+    CGRect originalFrame = _label.frame;
+    [UIView animateWithDuration:0.6
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseIn |
+        UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         _label.alpha = 0.3;
+                         _animView.alpha = 0.8;
+                         
+                      //  _label.frame = frame;
+                        
+                     }
+                     completion:^(BOOL finished) {
+                        
+                         [UIView animateWithDuration:0.2 animations:^{
+                            // _label.frame = originalFrame;
+                             _label.text = [NSString stringWithFormat:@"%d bikes",newAvailableBikes];
+                             _label.alpha =1;
+                             _animView.alpha = 0;
+                         } completion:^(BOOL finished) {
+                             
+                         }];
 
+                     }];
+}
 @end

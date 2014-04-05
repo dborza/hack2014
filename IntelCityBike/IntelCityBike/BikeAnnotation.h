@@ -14,6 +14,7 @@
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, assign) int bikeID;
+@property (nonatomic, assign) NSString *color;
 
 - (BikeAnnotation *)initWithLocation:(CLLocationCoordinate2D) coord bikeID:(int)bikeId;
 
