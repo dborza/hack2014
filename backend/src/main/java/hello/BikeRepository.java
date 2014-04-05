@@ -28,7 +28,7 @@ public interface BikeRepository extends PagingAndSortingRepository<Bike, Long> {
     @Transactional
     @Query(value = "select b from hello.Bike b " +
             "where (b.status=:status or :status is null) " +
-            "and (b.shoppingBasket=:shoppingBasket or :shoppeingBasket is null)" +
+            "and (b.shoppingBasket=:shoppingBasket or :shoppingBasket is null)" +
             "and (b.childrenSeat=:childrenSeat or :childrenSeat is null) " +
             "and (b.gender=:gender or :gender is null) " +
             "and (b.type=:type or :type is null) " +
