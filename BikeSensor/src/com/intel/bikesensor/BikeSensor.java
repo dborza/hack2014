@@ -27,6 +27,8 @@ import java.util.Random;
  * <p>
  * </p>
  * Specials thanks to {@code http://stackoverflow.com/questions/8235385/display-gps-location-on-screen-android}.
+ *
+ * @author Dan Borza [brz]
  */
 public class BikeSensor extends Activity {
 
