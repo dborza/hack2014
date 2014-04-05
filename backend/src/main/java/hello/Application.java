@@ -78,9 +78,8 @@ public class Application {
         b2.setColor(Bike.Color.Green);
 
 
-        double lat[] = {46.776476, 46.762818, 46.773947, 46.772161, 46.767428, 46.755772};
-        double lon[] = {23.606685, 23.578850, 23.588507, 23.584161, 23.586227, 23.591817};
-
+        double lat[] = {46.778423, 46.776476, 46.762818, 46.773947, 46.772161, 46.767428, 46.755772};
+        double lon[] = {23.605059, 23.606685, 23.578850, 23.588507, 23.584161, 23.586227, 23.591817};
 
         for (int i = 0; i < lat.length; i++) {
 
@@ -96,11 +95,20 @@ public class Application {
             bike.setLat(lat[i]);
             bike.setLon(lon[i]);
             bike.setStatus(Bike.Status.Free);
-            bike.setGender(Bike.Gender.values()[i % 3]);
-            bike.setType(Bike.Type.values()[i % 3]);
-            bike.setColor(Bike.Color.values()[i % 6]);
-            bike.setChildrenSeat(i % 2 == 0);
-            bike.setShoppingBasket(i % 3 == 0);
+
+            if (i > 0) {
+                bike.setGender(Bike.Gender.values()[i % 3]);
+                bike.setType(Bike.Type.values()[i % 3]);
+                bike.setColor(Bike.Color.values()[i % 6]);
+                bike.setChildrenSeat(i % 2 == 0);
+                bike.setShoppingBasket(i % 3 == 0);
+            } else {
+                bike.setGender(Bike.Gender.Female);
+                bike.setColor(Bike.Color.DarkBlue);
+                bike.setType(Bike.Type.MountainBike);
+                bike.setShoppingBasket(false);
+                bike.setChildrenSeat(false);
+            }
             bikeRepository.save(bike);
         }
 
