@@ -77,32 +77,33 @@ public class Application {
         b2.setLon(23.0);
         b2.setColor(Bike.Color.Green);
 
-        Station s1 = new Station();
-        s1.setCity("Cluj");
-        s1.setLat(46.776476);
-        s1.setLon(23.606685);
-        s1.setAvailableBikes(5);
-        stationRepository.save(s1);
 
-        Station s2 = new Station();
-        s2.setCity("Cluj");
-        s2.setLat(46.762813);
-        s2.setLon(23.577983);
-        s2.setAvailableBikes(0);
+        double lat[] = {46.776476, 46.762818, 46.773947, 46.772161, 46.767428, 46.755772};
+        double lon[] = {23.606685, 23.578850, 23.588507, 23.584161, 23.586227, 23.591817};
 
-        stationRepository.save(s2);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < lat.length; i++) {
+
+            Station s1 = new Station();
+            s1.setCity("Cluj");
+            s1.setLat(lat[i]);
+            s1.setLon(lon[i]);
+            s1.setAvailableBikes(1);
+            stationRepository.save(s1);
+
             Bike bike = new Bike();
             bike.setCity("Cluj");
-            bike.setLat(46.776476);
-            bike.setLon(23.606685 + 0.00001 * i);
+            bike.setLat(lat[i]);
+            bike.setLon(lon[i]);
             bike.setStatus(Bike.Status.Free);
-            bike.setGender(Bike.Gender.Female);
-            bike.setType(Bike.Type.CityBike);
-            bike.setColor(Bike.Color.Red);
+            bike.setGender(Bike.Gender.values()[i % 3]);
+            bike.setType(Bike.Type.values()[i % 3]);
+            bike.setColor(Bike.Color.values()[i % 6]);
+            bike.setChildrenSeat(i % 2 == 0);
+            bike.setShoppingBasket(i % 3 == 0);
             bikeRepository.save(bike);
         }
+
 
         Person person = new Person();
         person.setFirstName("James");
