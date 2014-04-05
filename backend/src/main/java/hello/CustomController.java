@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -111,6 +111,26 @@ public class CustomController {
         personRepository.save(p1);
     }
 
+    @RequestMapping(
+            value="/removeBuddy",
+            method= RequestMethod.PUT,
+            produces={"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public void removeBuddy(@RequestParam("me") long myId, @RequestParam("buddy") long buddyId) {
+
+        final Person person = personRepository.findOne(myId);
+
+        final Iterator<Person> buddyIterator = person.getBuddies().iterator();
+
+        while (buddyIterator.hasNext()) {
+            final Person buddy = buddyIterator.next();
+            if (buddy.getId() == buddyId) {
+                buddyIterator.remove();
+            }
+        }
+
+        personRepository.save(person);
+    }
 
     @RequestMapping(
             value="/getBikesOfBuddies/{id}",
@@ -135,6 +155,6 @@ public class CustomController {
         }
 
         return bikes;
-
     }
+
 }
