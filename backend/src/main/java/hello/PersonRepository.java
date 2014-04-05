@@ -13,4 +13,8 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
 
     List<Person> findByFirstName(@Param("name") String name);
 
+    List<Person> findByEmail(@Param("email") String email);
+
+    List<Person> findById(@Param("id") long id);
+
 }

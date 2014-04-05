@@ -105,13 +105,40 @@ public class Application {
         }
 
 
-        Person person = new Person();
-        person.setFirstName("James");
-        person.setLastName("Kirk");
-        person.setLastBike(b1);
+        Person person1 = new Person();
+        person1.setFirstName("James");
+        person1.setLastName("Kirk");
+        person1.setEmail("kirk");
+        person1.setLastBike(b1);
 
-        b1.setLastUser(person);
-        personRepository.save(person);
+        Person person2 = new Person();
+        person2.setFirstName("Jean Luc");
+        person2.setLastName("Picard");
+        person2.setEmail("picard");
+
+        Person person3 = new Person();
+        person3.setFirstName("Benjamin");
+        person3.setLastName("Sisko");
+        person3.setEmail("sisko");
+
+        Person person4 = new Person();
+        person4.setFirstName("Kathryn");
+        person4.setLastName("Janeway");
+        person4.setEmail("janeway");
+
+        Person person5 = new Person();
+        person5.setFirstName("Jonathan");
+        person5.setLastName("Archer");
+        person5.setEmail("archer");
+
+        person1.getBuddies().add(person2);
+
+        b1.setLastUser(person1);
+        personRepository.save(person1);
+        personRepository.save(person2);
+        personRepository.save(person3);
+        personRepository.save(person4);
+        personRepository.save(person5);
 
         bikeRepository.save(b1);
         bikeRepository.save(b2);

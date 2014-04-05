@@ -94,5 +94,26 @@ public class CustomController {
         stationRepository.updateAvailableBikesForStation(stationId, delta);
     }
 
+    @RequestMapping(
+            value="/addBuddy",
+            method= RequestMethod.PUT,
+            produces={"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public void addBuddy(@RequestParam("me") long myId, @RequestParam("buddy") long buddyId) {
+
+        List<Person> me = personRepository.findById(myId);
+        List<Person> buddy = personRepository.findById(buddyId);
+
+        if (me.size() == 0 || buddy.size() == 0) {
+            return ;
+        }
+
+        Person p1 = me.get(0);
+        Person p2 = buddy.get(0);
+
+        p1.getBuddies().add(p2);
+        personRepository.save(p1);
+    }
+
 
 }

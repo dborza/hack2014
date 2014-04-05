@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @EntityListeners(value = {AuditingEntityListener.class})
@@ -189,5 +190,23 @@ public class Bike {
         b.lon = 23.606102;
         return b;
     }
+
+    private static Random random = new Random();
+
+    public static Bike rand(double lat, double lon) {
+        final Bike b = new Bike();
+        b.city = "Cluj";
+        b.status = Status.Free;
+        b.lat = lat;
+        b.lon = lon;
+        b.childrenSeat = random.nextBoolean();
+        b.shoppingBasket = random.nextBoolean();
+        b.setColor(Color.values()[random.nextInt(Color.values().length)]);
+        b.setType(Type.values()[random.nextInt(Type.values().length)]);
+        b.setGender(Gender.values()[random.nextInt(Gender.values().length)]);
+
+        return b;
+    }
+
 
 }
