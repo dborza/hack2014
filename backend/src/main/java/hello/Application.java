@@ -201,8 +201,8 @@ public class Application {
             System.out.println("Reading routes...");
 
             for (int i = 1; i <= 12; i++) {
-                geoCoordinates.put(7L + i, new GeoCsvReader().run("/geo" + i + ".csv"));
-                currentPositions.put(7L + i, 0);
+                geoCoordinates.put(8L + i, new GeoCsvReader().run("/geo" + i + ".csv"));
+                currentPositions.put(8L + i, 0);
             }
         }
 
