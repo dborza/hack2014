@@ -72,14 +72,13 @@ public class CustomController {
         bikeRepository.updateGeoCoordinates(bikeId, lon, lat);
     }
 
-//    @Transactional
     @RequestMapping(
             value="/takeOrLeaveBikeAtStation",
             method= RequestMethod.PUT,
             produces={"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public void takeOrLeaveBikeAtStation(@RequestParam("bikeId") long bikeId, @RequestParam("stationId") long stationId,
-                                         @RequestParam("delta") int delta) {
+                                         @RequestParam("delta") int delta, @RequestParam("userId") long userId) {
 
         Bike.Status status = null;
 
