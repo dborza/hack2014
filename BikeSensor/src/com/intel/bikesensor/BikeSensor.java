@@ -42,7 +42,7 @@ public class BikeSensor extends Activity {
     /**
      * Http client used for Internet awesomeness.
      */
-    final DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+    private final DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
     /**
      * Called when the activity is first created.
@@ -72,10 +72,19 @@ public class BikeSensor extends Activity {
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 5.0f, locListener);
     }
 
+    /**
+     * Code for triggering the action to take / return a bike from a station.
+     */
     class TakeOrLeaveBikeAtStationOnClickListener implements View.OnClickListener {
 
         private final int delta;
 
+        /**
+         * Delta {@code +1} means we are returning the bike to the station and delta {@code -1}
+         * means we are taking it away from the station.
+         *
+         * @param delta The amount with which we increase the number of bikes from the station.
+         */
         TakeOrLeaveBikeAtStationOnClickListener(int delta) {
             this.delta = delta;
         }
@@ -145,6 +154,9 @@ public class BikeSensor extends Activity {
         }
     }
 
+    /**
+     * Handle the change of location event.
+     */
     public class MyLocationListener implements LocationListener
     {
         TextView tv = (TextView) findViewById(R.id.geoText);
