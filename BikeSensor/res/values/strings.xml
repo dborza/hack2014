@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BikeSensor</string>
-    <string name="server_bike_url">http://54.72.175.223:8080/api/updateCoordinates/</string>
-    <string name="take_or_leave_bike_at_station_url">http://54.72.175.223:8080/api/takeOrLeaveBikeAtStation</string>
+    <string name="server_bike_url">http://danborza.com:8080/api/updateCoordinates/</string>
+    <string name="take_or_leave_bike_at_station_url">http://danborza.com:8080/api/takeOrLeaveBikeAtStation</string>
 </resources>
