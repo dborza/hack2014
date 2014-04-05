@@ -169,6 +169,7 @@ public class Application {
         person5.setLastBike(movingBikes.get(4));
 
         person2.getBuddies().add(person1);
+        person2.getBuddies().add(person3);
 
         //b1.setLastUser(person1);
         personRepository.save(person2);

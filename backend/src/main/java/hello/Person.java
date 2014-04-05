@@ -5,7 +5,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 @Entity
 @EntityListeners(value = { AuditingEntityListener.class } )
@@ -20,8 +23,6 @@ public class Person {
 	private String lastName;
 
     private String email;
-
-    private long personId;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="PBIKE_ID")
@@ -120,9 +121,7 @@ public class Person {
         return id;
     }
 
-    public void setPersonId(long personId) {
-    }
-
+    public Long getLastBikeId() { return lastBike == null ? null : lastBike.getBikeId(); }
     /**
      *  Just generate a random {@link Person}.
      */

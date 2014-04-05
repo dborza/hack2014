@@ -113,7 +113,7 @@ public class CustomController {
 
 
     @RequestMapping(
-            value="/getBuddiesOnBikes/{id}",
+            value="/getBikesOfBuddies/{id}",
             method= RequestMethod.GET,
             produces={"application/json"})
     @ResponseStatus(HttpStatus.OK)
