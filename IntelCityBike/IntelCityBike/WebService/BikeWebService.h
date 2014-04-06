@@ -14,6 +14,7 @@
 @protocol BikeShowDelegate <NSObject>
 
 -(void) showBike:(Bike *) bike;
+-(void) showBikes:(NSMutableArray *) bikeArr;
 -(void) showStation:(Station *) station;
 
 @end

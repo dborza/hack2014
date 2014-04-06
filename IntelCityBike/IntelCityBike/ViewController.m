@@ -128,7 +128,18 @@ typedef enum : NSUInteger {
     [_stationAnnotationArray addObject:annotation];
     [_mapView addAnnotation:annotation];
 }
-
+- (void) showBikes:(NSMutableArray *) bikeArray
+{
+    [_mapView removeAnnotations:_annotationArray];
+    [_annotationArray removeAllObjects];
+    for (Bike * bike in bikeArray)
+    {
+        BikeAnnotation * bikeAnn = [[BikeAnnotation alloc] initBike:bike];
+        [_annotationArray addObject: bikeAnn];
+        
+    }
+    [self refreshBikeAnnotationView];
+}
 - (void) showBike:(Bike *) bike
 {
     BOOL isOnMap = false;

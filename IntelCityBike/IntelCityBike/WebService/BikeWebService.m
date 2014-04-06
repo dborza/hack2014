@@ -77,14 +77,17 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     NSDictionary * bikesDict = [dict objectForKey:@"_embedded"];
     NSArray *bikesArray = [bikesDict objectForKey:@"bikes"];
     
+    NSMutableArray * bikeArr = [[NSMutableArray alloc] init];
     for (NSDictionary *oneBikeDict in bikesArray ) {
         
         Bike * oneBike = [[Bike alloc] initWithDict:oneBikeDict];
-        if (_delegate && [_delegate respondsToSelector:@selector(showBike:)])
-        {
-            [_delegate showBike:oneBike];
-        }
+        [bikeArr addObject: oneBike];
     }
+    if (_delegate && [_delegate respondsToSelector:@selector(showBikes:)])
+    {
+        [_delegate showBikes:bikeArr];
+    }
+
     return dict;
 }
 - (NSDictionary *) decodeStations:(NSData *) bikes
@@ -94,6 +97,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     
     NSDictionary * stationsDict = [dict objectForKey:@"_embedded"];
     NSArray *stationsArray = [stationsDict objectForKey:@"stations"];
+    
+    
     
     for (NSDictionary *oneStationDict in stationsArray ) {
         
