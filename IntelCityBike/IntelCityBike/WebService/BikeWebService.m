@@ -82,11 +82,18 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         
         Bike * oneBike = [[Bike alloc] initWithDict:oneBikeDict];
         [bikeArr addObject: oneBike];
+        
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(showBike:)])
+        {
+            [_delegate showBike:oneBike];
+        }
+
     }
-    if (_delegate && [_delegate respondsToSelector:@selector(showBikes:)])
-    {
-        [_delegate showBikes:bikeArr];
-    }
+//    if (_delegate && [_delegate respondsToSelector:@selector(showBikes:)])
+//    {
+//        [_delegate showBikes:bikeArr];
+//    }
 
     return dict;
 }

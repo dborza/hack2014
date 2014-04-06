@@ -140,9 +140,10 @@ typedef enum : NSUInteger {
     }
     [self refreshBikeAnnotationView];
 }
+
 - (void) showBike:(Bike *) bike
 {
-    BOOL isOnMap = false;
+   
     for (BikeAnnotation *ann in _annotationArray)
     {
         if (ann.bikeID == bike.bikeID)
@@ -151,31 +152,80 @@ typedef enum : NSUInteger {
             {
                 return;
             }
-            if ([_shownAnnotationArray containsObject:ann] ) {
+            else{
                 
-                if ([bike.status isEqualToString: _filterStatus])
-                {   isOnMap =YES;
-                    [_shownAnnotationArray removeObject:ann];
+                ann.coordinate = bike.coord;
+                
+                if (ann.status != bike.status)
+                {
+                    if ([bike.status isEqualToString: _filterStatus])
+                    {
+                        [_mapView addAnnotation:ann];
+                    }
+                    else
+                    {
+                        [_mapView removeAnnotation:ann];
+                    }
+                    ann.status = bike.status;
                 }
-                [_mapView removeAnnotation:ann];
+                ann.status = bike.status;
+                
+                if ([_shownAnnotationArray containsObject:ann])
+                {
+                // [_mapView addAnnotation:ann];
+                }
+                
+                
             }
             
-            [_annotationArray removeObject:ann];
-            break;
+            return;
         }
+
     }
     
     BikeAnnotation *annotation = [[BikeAnnotation alloc] initBike:bike];
     [_annotationArray addObject:annotation];
- 
-    if(isOnMap || _filter == kFilterAll	){
-        [_shownAnnotationArray addObject:annotation];
-        [_mapView addAnnotation:annotation];
-        
-    }
+    [_mapView addAnnotation:annotation];
     
-
+    
 }
+
+//- (void) showBike:(Bike *) bike
+//{
+//    BOOL isOnMap = false;
+//    for (BikeAnnotation *ann in _annotationArray)
+//    {
+//        if (ann.bikeID == bike.bikeID)
+//        {
+//            if (bike.coord.latitude == ann.coordinate.latitude && bike.coord.longitude == ann.coordinate.longitude && bike.status == ann.status)
+//            {
+//                return;
+//            }
+//            if ([_shownAnnotationArray containsObject:ann] ) {
+//                
+//                if ([bike.status isEqualToString: _filterStatus])
+//                {   isOnMap =YES;
+//                    [_shownAnnotationArray removeObject:ann];
+//                }
+//                [_mapView removeAnnotation:ann];
+//            }
+//            
+//            [_annotationArray removeObject:ann];
+//            break;
+//        }
+//    }
+//    
+//    BikeAnnotation *annotation = [[BikeAnnotation alloc] initBike:bike];
+//    [_annotationArray addObject:annotation];
+// 
+//    if(isOnMap || _filter == kFilterAll	){
+//        [_shownAnnotationArray addObject:annotation];
+//        [_mapView addAnnotation:annotation];
+//        
+//    }
+//    
+//
+//}
 #pragma mark - CLLocationManager delegate
 
 -  (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
