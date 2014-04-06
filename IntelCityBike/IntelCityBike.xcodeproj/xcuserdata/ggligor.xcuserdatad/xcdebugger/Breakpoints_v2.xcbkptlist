@@ -249,7 +249,7 @@
                   symbolName = "-[StationAnnotationView label]"
                   moduleName = "IntelCityBike"
                   urlString = "file:///Users/ggligor/Desktop/hack2014/IntelCityBike/IntelCityBike/StationAnnotationView.m"
-                  timestampString = "418506219.1461"
+                  timestampString = "418506656.719267"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -263,7 +263,7 @@
                   symbolName = "-[StationAnnotationView setLabel:]"
                   moduleName = "IntelCityBike"
                   urlString = "file:///Users/ggligor/Desktop/hack2014/IntelCityBike/IntelCityBike/StationAnnotationView.m"
-                  timestampString = "418506219.146482"
+                  timestampString = "418506656.719529"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -700,38 +700,6 @@
             startingLineNumber = "61"
             endingLineNumber = "61"
             landmarkName = "-refreshStatus"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IntelCityBike/ViewController.m"
-            timestampString = "418505828.889394"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-showBike:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IntelCityBike/ViewController.m"
-            timestampString = "418505828.889394"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "-showBike:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

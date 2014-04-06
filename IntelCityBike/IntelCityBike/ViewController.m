@@ -142,7 +142,7 @@ typedef enum : NSUInteger {
             }
             if ([_shownAnnotationArray containsObject:ann] ) {
                 
-                if (bike.status == _filterStatus)
+                if ([bike.status isEqualToString: _filterStatus])
                 {   isOnMap =YES;
                     [_shownAnnotationArray removeObject:ann];
                 }
