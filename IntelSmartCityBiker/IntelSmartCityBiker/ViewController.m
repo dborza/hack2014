@@ -278,7 +278,8 @@
 }
 
 - (IBAction)bikeBuddiesTapped:(id)sender {
-    [[BikeWebService sharedBikeWebService]viewAllMyBuddies];
+    [self refreshBikeBuddies];
+
 }
 
 

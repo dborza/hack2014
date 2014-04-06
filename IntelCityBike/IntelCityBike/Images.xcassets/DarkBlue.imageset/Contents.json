@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "station.png"
+      "filename" : "DarkBlue.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "station@2x.png"
+      "filename" : "DarkBlue@2x.png"
     }
   ],
   "info" : {

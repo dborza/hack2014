@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62C7FED18F1C5340004BE96 /* BikeAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C7FEC18F1C5340004BE96 /* BikeAnnotationView.m */; };
 		D632D29018ED2EFB00A8092B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D632D28F18ED2EFB00A8092B /* Foundation.framework */; };
 		D632D29218ED2EFB00A8092B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D632D29118ED2EFB00A8092B /* CoreGraphics.framework */; };
 		D632D29418ED2EFB00A8092B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D632D29318ED2EFB00A8092B /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D62C7FEB18F1C5340004BE96 /* BikeAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikeAnnotationView.h; sourceTree = "<group>"; };
+		D62C7FEC18F1C5340004BE96 /* BikeAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikeAnnotationView.m; sourceTree = "<group>"; };
 		D632D28C18ED2EFB00A8092B /* IntelCityBike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntelCityBike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D632D28F18ED2EFB00A8092B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D632D29118ED2EFB00A8092B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,6 +108,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D62C7FEA18F1C4D50004BE96 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				D6D71EB818ED5C5500A7DB99 /* JSONKit.h */,
+				D6D71EB918ED5C5500A7DB99 /* JSONKit.m */,
+				D6EA5A5618ED4B870083CDA1 /* BikeWebService.h */,
+				D6EA5A5718ED4B870083CDA1 /* BikeWebService.m */,
+			);
+			name = WebService;
+			sourceTree = "<group>";
+		};
+		D62C7FEE18F1C54D0004BE96 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				D62C7FEB18F1C5340004BE96 /* BikeAnnotationView.h */,
+				D62C7FEC18F1C5340004BE96 /* BikeAnnotationView.m */,
+				D6EA5A4E18ED44010083CDA1 /* BikeAnnotation.h */,
+				D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */,
+				D6D71EC518EDA5B600A7DB99 /* StationAnnotation.h */,
+				D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */,
+				D6D71EC818EDAA1F00A7DB99 /* StationAnnotationView.h */,
+				D6D71EC918EDAA1F00A7DB99 /* StationAnnotationView.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		D62C7FEF18F1C5790004BE96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6D71EBB18ED5DAC00A7DB99 /* Bike.h */,
+				D6D71EBC18ED5DAC00A7DB99 /* Bike.m */,
+				D6D71EC218EDA16B00A7DB99 /* Station.h */,
+				D6D71EC318EDA16B00A7DB99 /* Station.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		D632D28318ED2EFB00A8092B = {
 			isa = PBXGroup;
 			children = (
@@ -139,8 +179,9 @@
 		D632D29518ED2EFB00A8092B /* IntelCityBike */ = {
 			isa = PBXGroup;
 			children = (
-				D6D71EB818ED5C5500A7DB99 /* JSONKit.h */,
-				D6D71EB918ED5C5500A7DB99 /* JSONKit.m */,
+				D62C7FEF18F1C5790004BE96 /* Model */,
+				D62C7FEE18F1C54D0004BE96 /* Map */,
+				D62C7FEA18F1C4D50004BE96 /* WebService */,
 				D632D29E18ED2EFB00A8092B /* AppDelegate.h */,
 				D632D29F18ED2EFB00A8092B /* AppDelegate.m */,
 				D632D2A118ED2EFB00A8092B /* Main_iPhone.storyboard */,
@@ -149,18 +190,6 @@
 				D632D2A818ED2EFB00A8092B /* ViewController.m */,
 				D632D2AA18ED2EFB00A8092B /* Images.xcassets */,
 				D632D29618ED2EFB00A8092B /* Supporting Files */,
-				D6EA5A4E18ED44010083CDA1 /* BikeAnnotation.h */,
-				D6EA5A4F18ED44010083CDA1 /* BikeAnnotation.m */,
-				D6EA5A5618ED4B870083CDA1 /* BikeWebService.h */,
-				D6EA5A5718ED4B870083CDA1 /* BikeWebService.m */,
-				D6D71EBB18ED5DAC00A7DB99 /* Bike.h */,
-				D6D71EBC18ED5DAC00A7DB99 /* Bike.m */,
-				D6D71EC218EDA16B00A7DB99 /* Station.h */,
-				D6D71EC318EDA16B00A7DB99 /* Station.m */,
-				D6D71EC518EDA5B600A7DB99 /* StationAnnotation.h */,
-				D6D71EC618EDA5B600A7DB99 /* StationAnnotation.m */,
-				D6D71EC818EDAA1F00A7DB99 /* StationAnnotationView.h */,
-				D6D71EC918EDAA1F00A7DB99 /* StationAnnotationView.m */,
 			);
 			path = IntelCityBike;
 			sourceTree = "<group>";
@@ -313,6 +342,7 @@
 			files = (
 				D632D2A918ED2EFB00A8092B /* ViewController.m in Sources */,
 				D6EA5A5818ED4B870083CDA1 /* BikeWebService.m in Sources */,
+				D62C7FED18F1C5340004BE96 /* BikeAnnotationView.m in Sources */,
 				D6D71EBA18ED5C5500A7DB99 /* JSONKit.m in Sources */,
 				D6EA5A5018ED44010083CDA1 /* BikeAnnotation.m in Sources */,
 				D6D71ECA18EDAA1F00A7DB99 /* StationAnnotationView.m in Sources */,

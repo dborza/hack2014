@@ -36,14 +36,13 @@
         
         CGRect  myFrame = self.frame;
         myFrame.size.width = 40;
-        myFrame.size.height = 80;
+        myFrame.size.height = 100;
         self.frame = myFrame;
         
         self.opaque = NO;
         
         CGRect rect = (CGRect){-10,0,self.frame.size.width+20,20};
         
-        //self.image = [UIImage imageNamed:@"station.png"];
         _label = [[UILabel alloc] initWithFrame:rect];
         _label.textAlignment = NSTextAlignmentCenter;
         _label.backgroundColor = [UIColor clearColor];

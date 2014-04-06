@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3864D84A-4DD8-4308-98F9-02779E1F8B12</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IntelCityBike</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C4D1D995-2B34-491E-9033-4AA58AC29B3B</key>
+		<string>https://github.com/dborza/hack2014</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IntelCityBike/IntelCityBike.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C4D1D995-2B34-491E-9033-4AA58AC29B3B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dborza/hack2014</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C4D1D995-2B34-491E-9033-4AA58AC29B3B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C4D1D995-2B34-491E-9033-4AA58AC29B3B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>hack2014</string>
+		</dict>
+	</array>
+</dict>
+</plist>

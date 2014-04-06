@@ -27,6 +27,7 @@
         _coordinate = bike.coord;
         _bikeID = bike.bikeID;
         _color = bike.color;
+        _status = bike.status;
     }
     return self;
     
