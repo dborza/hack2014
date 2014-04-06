@@ -100,7 +100,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         Station * oneStation = [[Station alloc] initWithDict:oneStationDict];
         if (_delegate && [_delegate respondsToSelector:@selector(showStation:)])
         {
-          //  _x+=1;
+
+            
             oneStation.availableBikes +=_x;
             [_delegate showStation:oneStation];
         }
@@ -145,6 +146,7 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     
     if (!error)
     {
+        //_x+=1;
         [self performSelectorOnMainThread:@selector(decodeStations:) withObject:responseData waitUntilDone:YES];
     }
     

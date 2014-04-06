@@ -112,6 +112,7 @@ typedef enum : NSUInteger {
             {
                 ann.availableBikes = station.availableBikes;
                 StationAnnotationView *annView = (StationAnnotationView *)[_mapView viewForAnnotation:ann];
+                
                 [annView animateBikeChange:ann.availableBikes];
                 return;
             }
