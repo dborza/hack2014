@@ -22,7 +22,7 @@ public class BikeCleanupService {
     //  10 minutes
     private final long TEN_MINUTES_IN_MILLIS = 10 * 60 * 1000;
 
-    @Scheduled(fixedDelay = 10000)
+//    @Scheduled(fixedDelay = 10000)
     public void run() {
 
         final long currentTime = System.currentTimeMillis();
