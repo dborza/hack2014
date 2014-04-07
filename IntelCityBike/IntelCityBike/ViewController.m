@@ -158,7 +158,8 @@ typedef enum : NSUInteger {
                 
                 if (ann.status != bike.status)
                 {
-                    if ([bike.status isEqualToString: _filterStatus])
+                    ann.status = bike.status;
+                    if ([bike.status isEqualToString: _filterStatus] || (_filter == kFilterAll))
                     {
                         [_mapView addAnnotation:ann];
                     }
@@ -166,7 +167,7 @@ typedef enum : NSUInteger {
                     {
                         [_mapView removeAnnotation:ann];
                     }
-                    ann.status = bike.status;
+                    
                 }
                 ann.status = bike.status;
                 

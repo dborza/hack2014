@@ -10,6 +10,9 @@
 
 @interface AddBuddiesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray * people;
+@property (nonatomic, strong) NSMutableArray * buddies;
 @property (weak, nonatomic) IBOutlet UITableView *peopleTableView;
 @property (weak, nonatomic) id delegate;
+
+
 @end

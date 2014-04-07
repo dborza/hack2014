@@ -17,8 +17,10 @@
 -(void) showBike:(Bike *) bike;
 -(void) showStation:(Station *) station;
 -(void) receivedPeople:(NSMutableArray *) peopleArr;
+-(void) receivedBuddies:(NSMutableArray *) peopleArr;
 -(void) refreshBikes;
 -(void) refreshBikeBuddies;
+-(void) refreshBuddies;
 
 
 @end
@@ -37,6 +39,7 @@
 - (void) reserveBikeWithId:(int) bikeID;
 - (void) cancelBikeWithId:(int) bikeID;
 - (void) getMyFriends;
+- (void) getMyBuddies;
 - (void) addBuddy:(int) friendID;
 - (void) viewAllMyBuddies;
 

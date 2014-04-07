@@ -31,7 +31,7 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 @property (nonatomic, strong) NSTimer *stationTimer;
 @property (nonatomic, strong) JSONDecoder *decoder;
 @property (nonatomic, assign) WSType connectionType;
-
+@property (nonatomic, strong) NSTimer * requestTimer;
 @property (nonatomic, strong) NSMutableArray *requestsArray;
 @end
 
@@ -48,6 +48,8 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     {
          _decoder = [[JSONDecoder alloc] init];
         _requestsArray = [[NSMutableArray alloc] init];
+        _requestTimer = [[NSTimer alloc] initWithFireDate:[NSDate date ] interval:2 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_requestTimer forMode:NSDefaultRunLoopMode];
     }
     return self;
 }
@@ -62,6 +64,14 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     
     return sharedBikeService;
     
+}
+
+- (void) timerFired:(NSTimer *)timer
+{
+    if ([_requestsArray count]>0)
+    {
+        [self startNextRequest];
+    }
 }
 
 - (void) getAllStations
@@ -84,12 +94,20 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
     [self enqueueRequest:bikeReq];
 
 }
+- (void) getMyBuddies
+{
+    NSURL *url = [[NSURL alloc] initWithString: [NSString stringWithFormat:@"%@/people/1/buddies",DanIP] ];
+    NSURLRequest * request = [[NSURLRequest alloc] initWithURL:url];
+    BikeWSRequest *bikeReq =[[BikeWSRequest alloc] initWithRequest:request type:kWSTypeBuddies];
+    [self enqueueRequest:bikeReq];
+
+}
 
 - (void) viewAllMyBuddies
 {
     NSURL *url = [[NSURL alloc] initWithString: [NSString stringWithFormat:@"%@/api/getBikesOfBuddies/1",DanIP] ];
     NSURLRequest * request = [[NSURLRequest alloc] initWithURL:url];
-    BikeWSRequest *bikeReq =[[BikeWSRequest alloc] initWithRequest:request type:kWSTypeBuddies];
+    BikeWSRequest *bikeReq =[[BikeWSRequest alloc] initWithRequest:request type:kWSTypeBuddiesBikes];
     [self enqueueRequest:bikeReq];
 
 }
@@ -155,7 +173,11 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
 - (void) enqueueRequest:(BikeWSRequest *) bikeRequest
 {
     [_requestsArray addObject:bikeRequest];
-    [self startNextRequest];
+ 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startNextRequest];
+    });
+
 }
 - (void) startNextRequest
 {
@@ -219,9 +241,19 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         [allPeople addObject:onePers];
     }
     
-    if (_delegate && [_delegate respondsToSelector:@selector(receivedPeople:)])
+    if ( _connectionType == kWSTypeBuddies)
     {
-        [_delegate receivedPeople:allPeople];
+        if (_delegate && [_delegate respondsToSelector:@selector(receivedBuddies:)])
+        {
+            [_delegate receivedBuddies:allPeople];
+        }
+ 
+    }
+    else if ( _connectionType == kWSTypePeople) {
+        if (_delegate && [_delegate respondsToSelector:@selector(receivedPeople:)])
+        {
+            [_delegate receivedPeople:allPeople];
+        }
     }
 
     return dict;
@@ -256,7 +288,7 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
             [self decodeBikes:data];
         }
             break;
-        case kWSTypeBuddies:
+        case kWSTypeBuddiesBikes:
         {
             [self decodeBuddyBikes:data];
         }
@@ -271,17 +303,32 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         case kWSTypePeople:
         {
             [self decodePeople:data];
+            
         }
             break;
-            case kWSTypeAddPeople:
+        case kWSTypeBuddies:
         {
+            [self decodePeople:data];
+            
+        }
+            break;
+        case kWSTypeAddPeople:
+        {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self getMyBuddies];
+                
+            });
+
             if (_delegate && ([_delegate respondsToSelector:@selector(refreshBikeBuddies)]))
             {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [_delegate refreshBikeBuddies];
+                    
                 });
                 
             }
+
         }
             break;
         case kWSTypeReserve:
@@ -322,9 +369,10 @@ NSString *const MihaiIP = @"http://10.41.0.136:8080";
         [_requestsArray removeObject:bikeRequest];
     }
     
+    [self processResponse:_data];
+
     [_urlConnection cancel];
     _urlConnection = nil;
-    [self processResponse:_data];
     _connectionType = kWSTypeNone;
     [self startNextRequest];
 }

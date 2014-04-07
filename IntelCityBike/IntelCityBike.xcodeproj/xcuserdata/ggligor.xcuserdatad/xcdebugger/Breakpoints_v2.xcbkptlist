@@ -38,7 +38,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IntelCityBike/WebService/BikeWebService.m"
@@ -249,7 +249,7 @@
                   symbolName = "-[StationAnnotationView label]"
                   moduleName = "IntelCityBike"
                   urlString = "file:///Users/ggligor/Desktop/hack2014/IntelCityBike/IntelCityBike/StationAnnotationView.m"
-                  timestampString = "418509493.017845"
+                  timestampString = "418544583.885"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -263,7 +263,7 @@
                   symbolName = "-[StationAnnotationView setLabel:]"
                   moduleName = "IntelCityBike"
                   urlString = "file:///Users/ggligor/Desktop/hack2014/IntelCityBike/IntelCityBike/StationAnnotationView.m"
-                  timestampString = "418509493.018262"
+                  timestampString = "418544583.885522"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IntelCityBike/ViewController.m"
-            timestampString = "418509431.793974"
+            timestampString = "418544583.848208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-mapView:viewForAnnotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IntelCityBike/ViewController.m"
-            timestampString = "418509431.793974"
+            timestampString = "418544583.848208"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-mapView:viewForAnnotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -716,22 +716,6 @@
             startingLineNumber = "133"
             endingLineNumber = "133"
             landmarkName = "-showBikes:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IntelCityBike/ViewController.m"
-            timestampString = "418509406.228513"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-showBike:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

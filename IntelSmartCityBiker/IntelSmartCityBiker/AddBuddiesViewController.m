@@ -36,6 +36,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (bool) isPersonABuddy: (People *) pers
+{
+    for (People *buddy in _buddies)
+    {
+        if (buddy.persID == pers.persID)
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -53,7 +64,9 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:peopleCell];
     }
-    cell.textLabel.text = [(People *)[_people objectAtIndex:indexPath.row] fullName];
+    People * person = (People *)[_people objectAtIndex:indexPath.row];
+    cell.textLabel.text = [person fullName];
+    cell.accessoryType = [self isPersonABuddy:person]?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
     return cell;
 }
 
@@ -64,4 +77,7 @@
         [_delegate performSelector:@selector(addABuddy:) withObject:[_people objectAtIndex:indexPath.row]];
     }
 }
+
+
+
 @end

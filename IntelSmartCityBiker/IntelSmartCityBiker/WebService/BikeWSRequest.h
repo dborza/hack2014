@@ -14,8 +14,10 @@ typedef enum : NSUInteger {
     kWSTypeStations,
     kWSTypePeople,
     kWSTypeAddPeople,
+    kWSTypeBuddiesBikes,
     kWSTypeBuddies,
     kWSTypeNone,
+    
     
 } WSType;
 

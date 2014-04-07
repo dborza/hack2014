@@ -29,6 +29,8 @@
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) BikeSearchCriteria *lastCriteria;
 @property (nonatomic, strong) NSMutableArray *peopleArr;
+@property (nonatomic, strong) NSMutableArray *buddiesArr;
+
 
 @property (nonatomic, strong) UIPopoverController *peoplePopover;
 @property (nonatomic, strong) AddBuddiesViewController *addVC;
@@ -302,6 +304,7 @@
      [[BikeWebService sharedBikeWebService] viewAllMyBuddies];
     
 }
+
 - (void) refreshBikes
 {
  
@@ -319,12 +322,26 @@
 {
     _peopleArr = peopleArr;
     _addVC.people = _peopleArr;
+    
+    [[BikeWebService sharedBikeWebService] getMyBuddies];
     if (_peoplePopover.isPopoverVisible)
     {
         [_addVC.peopleTableView reloadData];
     }
 
 }
+- (void) receivedBuddies:(NSMutableArray *)peopleArr
+{
+    _buddiesArr = peopleArr;
+    _addVC.people = _peopleArr;
+    _addVC.buddies = _buddiesArr;
+    if (_peoplePopover.isPopoverVisible)
+    {
+        [_addVC.peopleTableView reloadData];
+    }
+    
+}
+
 - (IBAction)addBuddiesTapped:(id)sender {
     
     [[BikeWebService sharedBikeWebService] getMyFriends];
@@ -333,7 +350,8 @@
                                  animated:YES ];
 
 }
-- (void)addABuddy:(People*) people
+
+-(void)addABuddy:(People*) people
 {
     if ([_peoplePopover isPopoverVisible])
     {
