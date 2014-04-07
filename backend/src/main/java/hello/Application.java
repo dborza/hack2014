@@ -89,8 +89,8 @@ public class Application {
 
             Station s1 = new Station();
             s1.setCity("Cluj");
-            s1.setLat(lat[i]);
-            s1.setLon(lon[i]);
+            s1.setLat(lat[i] + 0.0001);
+            s1.setLon(lon[i] + 0.0001);
             s1.setAvailableBikes(1);
             stationRepository.save(s1);
 
