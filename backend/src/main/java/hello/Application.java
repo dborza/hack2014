@@ -201,7 +201,7 @@ public class Application {
             this.bikeRepository = bikeRepository;
             System.out.println("Reading routes...");
 
-            for (int i = 1; i <= 12; i++) {
+            for (int i = 1; i <= 30; i++) {
                 geoCoordinates.put(8L + i, new GeoCsvReader().run("/geo" + i + ".csv"));
                 currentPositions.put(8L + i, 0);
             }
