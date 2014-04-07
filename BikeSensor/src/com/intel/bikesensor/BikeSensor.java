@@ -96,12 +96,13 @@ public class BikeSensor extends Activity {
             final EditText stationIdEditText = (EditText) findViewById(R.id.text_stationId);
             final Long bikeId = Long.valueOf(bikeIdEditText.getText().toString());
             final Long stationId = Long.valueOf(stationIdEditText.getText().toString());
+            final long userId = 1;
 
             Log.i("tag", "delta: " + delta + ", bikeId: " + bikeId + ", stationId: " + stationId);
 
             String baseUrl = getString(R.string.take_or_leave_bike_at_station_url);
 
-            new TakeOrLeaveBikeAtStationAsyncTask(bikeId, stationId, delta, baseUrl).execute();
+            new TakeOrLeaveBikeAtStationAsyncTask(bikeId, stationId, delta, baseUrl, userId).execute();
         }
     }
 
@@ -115,18 +116,21 @@ public class BikeSensor extends Activity {
         private final long stationId;
         private final int delta;
         private final String baseUrl;
+        private final long userId;
 
-        TakeOrLeaveBikeAtStationAsyncTask(long bikeId, long stationId, int delta, String baseUrl) {
+        TakeOrLeaveBikeAtStationAsyncTask(long bikeId, long stationId, int delta, String baseUrl, long userId) {
             this.bikeId = bikeId;
             this.stationId = stationId;
             this.delta = delta;
             this.baseUrl = baseUrl;
+            this.userId = userId;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            final HttpPut put = new HttpPut(baseUrl + "?bikeId=" + bikeId + "&stationId=" + stationId + "&delta=" + delta);
+            final HttpPut put = new HttpPut(baseUrl + "?bikeId=" + bikeId + "&stationId=" + stationId
+                    + "&delta=" + delta + "&userId=" + userId);
 
             HttpResponse response = null;
 
